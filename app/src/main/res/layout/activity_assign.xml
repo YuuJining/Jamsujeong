@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <LinearLayout android:orientation="vertical" android:layout_height="match_parent" android:layout_width="match_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="시간 설정" android:layout_marginTop="20dp" android:layout_marginLeft="20dp" android:layout_marginStart="16dp"/>
+
+    <TimePicker android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginTop="10dp" android:layout_marginLeft="20dp" android:timePickerMode="spinner"/>
+
+    <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="알람 설정" android:layout_marginTop="16dp" android:layout_marginLeft="20dp" android:layout_marginStart="16dp"/>
+
+
+    <LinearLayout android:orientation="horizontal" android:layout_height="wrap_content" android:layout_width="wrap_content">
+
+    <CheckBox android:layout_height="wrap_content" android:layout_width="match_parent" android:text="5분전 알람" android:layout_marginTop="10dp" android:layout_marginLeft="20dp" android:id="@+id/checkBox"/>
+
+    <CheckBox android:layout_height="wrap_content" android:layout_width="match_parent" android:text="10분전 알람" android:layout_marginTop="10dp" android:layout_marginLeft="20dp" android:id="@+id/checkBox2"/>
+
+</LinearLayout>
+
+
+    <LinearLayout android:orientation="horizontal" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginTop="80dp" android:layout_gravity="center_horizontal">
+
+    <Button android:layout_height="wrap_content" android:layout_width="match_parent" android:text="확인" android:layout_marginTop="10dp" android:layout_marginLeft="20dp" android:id="@+id/Button"/>
+
+    <Button android:layout_height="wrap_content" android:layout_width="match_parent" android:text="닫기" android:layout_marginTop="10dp" android:layout_marginLeft="20dp" android:id="@+id/Button2"/>
+
+</LinearLayout>
+
+</LinearLayout>

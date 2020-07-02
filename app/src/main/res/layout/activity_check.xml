@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <LinearLayout android:orientation="vertical" android:layout_height="match_parent" android:layout_width="match_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Spinner android:layout_height="wrap_content" android:layout_width="350dp" android:layout_marginTop="30dp" android:layout_gravity="center_horizontal" android:id="@+id/Spinner"/>
+
+    <FrameLayout android:layout_height="500dp" android:layout_width="400dp" android:layout_marginTop="25dp" android:layout_gravity="center_horizontal"> </FrameLayout>
+
+</LinearLayout>

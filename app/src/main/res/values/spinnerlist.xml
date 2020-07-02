@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <resources>
+    <string-array name="location">
+
+    <item>수정관 1층 스냅존</item>
+
+    <item>난향관 포레스트</item>
+
+    <item>운정캠 도서관</item>
+
+</string-array>
+
+</resources>
