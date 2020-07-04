@@ -12,10 +12,13 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp" />
 
-    <FrameLayout
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/pager"
         android:layout_width="400dp"
         android:layout_height="500dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="25dp"></FrameLayout>
+        android:layout_marginTop="25dp">
+
+    </androidx.viewpager.widget.ViewPager>
 
 </LinearLayout>

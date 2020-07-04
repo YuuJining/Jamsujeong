@@ -14,12 +14,14 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/assignButton"
             android:layout_width="150dp"
             android:layout_height="80dp"
             android:layout_margin="10dp"
             android:text="좌석배정" />
 
         <Button
+            android:id="@+id/checkButton"
             android:layout_width="150dp"
             android:layout_height="80dp"
             android:layout_margin="10dp"
