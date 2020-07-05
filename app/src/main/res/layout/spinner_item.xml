@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TextView style="?android:attr/spinnerStyle" android:padding="4dp" android:textSize="15dp" android:layout_height="wrap_content" android:layout_width="match_parent" xmlns:android="http://schemas.android.com/apk/res/android"/>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="?android:attr/spinnerStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="4dp"
+    android:textSize="15dp" />
