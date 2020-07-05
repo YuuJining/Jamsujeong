@@ -4,6 +4,7 @@ import android.os.Bundle;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -73,6 +74,18 @@ public class CheckActivity extends AppCompatActivity {
 
         public void addItem(Fragment item) {
             items.add(item);
+        }
+
+        @Nullable
+        @Override
+        public CharSequence getPageTitle(int position) {
+            if(position == 0) {
+                return "snapzone";
+            } else if (position == 1) {
+                return "forest";
+            } else {
+                return "library";
+            }
         }
     }
 }

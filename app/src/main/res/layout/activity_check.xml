@@ -5,12 +5,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Spinner
-        android:id="@+id/Spinner"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp" />
+<!--    <Spinner-->
+<!--        android:id="@+id/Spinner"-->
+<!--        android:layout_width="350dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center_horizontal"-->
+<!--        android:layout_marginTop="30dp" />-->
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/pager"
@@ -19,6 +19,12 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="25dp">
 
+        <androidx.viewpager.widget.PagerTabStrip
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp">
+
+        </androidx.viewpager.widget.PagerTabStrip>
     </androidx.viewpager.widget.ViewPager>
 
 </LinearLayout>
