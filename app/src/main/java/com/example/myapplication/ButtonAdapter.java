@@ -1,17 +1,24 @@
 package com.example.myapplication;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 public class ButtonAdapter extends BaseAdapter {
     Context context = null;
     String[] ButtonNames = null;
+    private LayoutInflater thisInflater;
 
     public ButtonAdapter(Context context, String[] Buttons) {
         this.context = context;
+        this.thisInflater = LayoutInflater.from(context);
         ButtonNames = Buttons;
     }
 
@@ -31,28 +38,49 @@ public class ButtonAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         Button button = null;
 
         if(convertView != null) {
             button = (Button)convertView;
         } else {
 
+            convertView = thisInflater.inflate(R.layout.grid_item, parent, false);
+            ImageView button_default = (ImageView) convertView.findViewById(R.id.button_background);
+
             button = new Button(context);
             button.setText(ButtonNames[position]);
+            button_default.setImageResource(R.drawable.button_design1);
+
 
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    int num = (int) getItemId(position) + 1;
+                    Toast.makeText(context,"좌석 " + getItemId(num) + 1 + "을 이용하겠습니까?", Toast.LENGTH_LONG).show();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setMessage("좌석 " + getItemId(num + 1) + "을 이용하시겠습니까?");
+                    builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    builder.setNeutralButton("취소", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
                 }
             });
         }
         return button;
     }
-    class ButtonClickListener implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-
-        }
-    }
+//    class ButtonClickListener implements View.OnClickListener {
+//        @Override
+//        public void onClick(View v) {
+//
+//        }
+//    }
 }

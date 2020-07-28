@@ -1,15 +1,21 @@
 package com.example.myapplication;
 
 import android.content.Intent;
+import android.nfc.NdefMessage;
+import android.nfc.NdefRecord;
+import android.nfc.NfcAdapter;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import java.nio.charset.Charset;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 
 public class MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,5 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, 101);
             }
         });
+
+
     }
 }
