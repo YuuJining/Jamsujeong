@@ -42,13 +42,13 @@ public class CheckActivity extends AppCompatActivity {
         pager = (ViewPager) findViewById(R.id.pager);
         PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager());
 
-        Fragment_snapzone snapzone = new Fragment_snapzone();
+        Fragment_snapzone_check snapzone = new Fragment_snapzone_check();
         pagerAdapter.addItem(snapzone);
 
-        Fragment_forest forest = new Fragment_forest();
+        Fragment_forest_check forest = new Fragment_forest_check();
         pagerAdapter.addItem(forest);
 
-        Fragment_library library = new Fragment_library();
+        Fragment_library_check library = new Fragment_library_check();
         pagerAdapter.addItem(library);
 
         pager.setAdapter(pagerAdapter);

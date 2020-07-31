@@ -11,14 +11,14 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-public class CheckActivity extends AppCompatActivity {
+public class AssignActivity extends AppCompatActivity {
 
     ViewPager pager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_check);
+        setContentView(R.layout.activity_assign);
 
 //        final Spinner spinner = (Spinner) findViewById(R.id.Spinner);
 //        String[] str = getResources().getStringArray(R.array.location);
@@ -40,15 +40,16 @@ public class CheckActivity extends AppCompatActivity {
 //        });
 
         pager = (ViewPager) findViewById(R.id.pager);
+        pager.setPageTransformer(true, new DepthPageTransformer());
         PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager());
 
-        Fragment_snapzone snapzone = new Fragment_snapzone();
+        Fragment_snapzone_assign snapzone = new Fragment_snapzone_assign();
         pagerAdapter.addItem(snapzone);
 
-        Fragment_forest forest = new Fragment_forest();
+        Fragment_forest_assign forest = new Fragment_forest_assign();
         pagerAdapter.addItem(forest);
 
-        Fragment_library library = new Fragment_library();
+        Fragment_library_assign library = new Fragment_library_assign();
         pagerAdapter.addItem(library);
 
         pager.setAdapter(pagerAdapter);

@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class Fragment_snapzone extends Fragment {
+public class Fragment_snapzone_assign extends Fragment {
     private Context mContext;
 
     @Override
