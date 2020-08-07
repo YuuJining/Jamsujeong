@@ -1,26 +1,37 @@
 package com.example.myapplication;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.NumberPicker;
 
+import java.util.Calendar;
+import java.util.Timer;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SetTimeActivity extends AppCompatActivity {
 
+    Context context;
+    final Calendar calendar = Calendar.getInstance();
+    AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.set_time);
 
-        NumberPicker hpicker = (NumberPicker) findViewById(R.id.hpicker);
+        context = getApplicationContext();
+
+        final NumberPicker hpicker = (NumberPicker) findViewById(R.id.hpicker);
         hpicker.setMinValue(0);
         hpicker.setMaxValue(2);
         hpicker.setWrapSelectorWheel(false);
 
-        NumberPicker mpicker = (NumberPicker) findViewById(R.id.mpicker);
+        final NumberPicker mpicker = (NumberPicker) findViewById(R.id.mpicker);
         mpicker.setMinValue(0);
         mpicker.setMaxValue(59);
 
@@ -35,16 +46,25 @@ public class SetTimeActivity extends AppCompatActivity {
                                                 "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"});
         mpicker.setWrapSelectorWheel(false);
 
-        Button positive = (Button) findViewById(R.id.positiveButton);
+        Button positive = (Button) findViewById(R.id.button_start);
         positive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int hour = hpicker.getValue();
+                int minute = mpicker.getValue();
+
+                Intent AlarmIntent = new Intent(context, AlarmReceiver.class);
+                PendingIntent sender = PendingIntent.getBroadcast(context,0, AlarmIntent, 0);
+
+                //AlarmManager에 알람 등록
+                alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), sender);
+
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivityForResult(intent, 101);
             }
         });
 
-        Button negative = (Button) findViewById(R.id.negativeButton);
+        Button negative = (Button) findViewById(R.id.button_cancel);
         negative.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
