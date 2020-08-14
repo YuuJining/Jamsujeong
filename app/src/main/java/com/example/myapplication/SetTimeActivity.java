@@ -4,7 +4,9 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.NumberPicker;
@@ -17,14 +19,13 @@ import androidx.appcompat.app.AppCompatActivity;
 public class SetTimeActivity extends AppCompatActivity {
 
     Context context;
-    final Calendar calendar = Calendar.getInstance();
-    AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+    CountDownTimer countDownTimer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.set_time);
 
-        context = getApplicationContext();
+        context = this;
 
         final NumberPicker hpicker = (NumberPicker) findViewById(R.id.hpicker);
         hpicker.setMinValue(0);
@@ -50,16 +51,13 @@ public class SetTimeActivity extends AppCompatActivity {
         positive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int hour = hpicker.getValue();
-                int minute = mpicker.getValue();
+                String hour = String.valueOf(hpicker.getValue());
+                String min = String.valueOf(mpicker.getValue());
 
-                Intent AlarmIntent = new Intent(context, AlarmReceiver.class);
-                PendingIntent sender = PendingIntent.getBroadcast(context,0, AlarmIntent, 0);
+                Intent intent = new Intent(context, MainActivity.class);
+                intent.putExtra("hours", hour);
+                intent.putExtra("minutes", min);
 
-                //AlarmManager에 알람 등록
-                alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), sender);
-
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivityForResult(intent, 101);
             }
         });
@@ -71,5 +69,21 @@ public class SetTimeActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    public void countDown(String hour, String min) {
+        long conversionTime = 0;
+        conversionTime = Long.valueOf(hour) * 1000 * 3600 + Long.valueOf(min) * 60 * 1000;
+        countDownTimer = new CountDownTimer(conversionTime, 60000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        }.start();
     }
 }
