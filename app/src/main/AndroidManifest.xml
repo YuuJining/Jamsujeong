@@ -31,8 +31,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
         <activity android:name=".SignupActivity"></activity>
         <activity android:name=".LoginActivity" ></activity>
+=======
+        <receiver android:name=".AlarmReceiver"/>
+>>>>>>> 알람기능
     </application>
 
 </manifest>
