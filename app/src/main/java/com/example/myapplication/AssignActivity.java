@@ -37,9 +37,11 @@ public class AssignActivity extends AppCompatActivity {
 
         NumberPicker mpicker = (NumberPicker) findViewById(R.id.mpicker);
         mpicker.setMinValue(0);
-        mpicker.setMaxValue(6);
-        mpicker.setDisplayedValues(new String[]{"0", "10", "20", "30", "40", "50", "60"});
+        mpicker.setMaxValue(5);
+        mpicker.setDisplayedValues(new String[]{"0", "10", "20", "30", "40", "50"});
         mpicker.setWrapSelectorWheel(false);
+
+
 
         Button positive = (Button) findViewById(R.id.positiveButton);
         positive.setOnClickListener(new View.OnClickListener() {

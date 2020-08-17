@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+<<<<<<< HEAD
         <activity android:name=".AssignActivity">
             <intent-filter>
                 <action android:name="android.nfc.action.TAG_DISCOVERED"/>
@@ -23,11 +24,20 @@
         <activity android:name=".CheckActivity" />
 
         <activity android:name=".MainActivity">
+=======
+        <activity android:name=".SignupActivity"></activity>
+        <activity android:name=".LoginActivity" >
+>>>>>>> 6a6def3c9a18f5e6fe2ab5fb56c983a6616b02a8
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".AssignActivity" />
+        <activity android:name=".CheckActivity" />
+        <activity android:name=".MainActivity">
+
         </activity>
     </application>
 
