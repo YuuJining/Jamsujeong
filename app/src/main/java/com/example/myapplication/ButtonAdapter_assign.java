@@ -3,6 +3,7 @@ package com.example.myapplication;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +12,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-public class ButtonAdapter extends BaseAdapter {
+public class ButtonAdapter_assign extends BaseAdapter {
     Context context = null;
     String[] ButtonNames = null;
     private LayoutInflater thisInflater;
 
-    public ButtonAdapter(Context context, String[] Buttons) {
+    public ButtonAdapter_assign(Context context, String[] Buttons) {
         this.context = context;
         this.thisInflater = LayoutInflater.from(context);
         ButtonNames = Buttons;
@@ -58,21 +59,25 @@ public class ButtonAdapter extends BaseAdapter {
                 public void onClick(View v) {
                     final int seatId = (int) getItemId(position) + 1;
 
-                    Toast.makeText(context,"좌석 " + getItemId(seatId) + "을 이용하겠습니까?", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(context,"좌석 " + getItemId(seatId) + "을 이용하겠습니까?", Toast.LENGTH_LONG).show();
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setMessage("좌석 " + getItemId(seatId) + "을 이용하시겠습니까?");
+
                     builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                         @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Toast.makeText(context,"좌석 " + getItemId(seatId) + " 선택이 완료되었습니다.", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(context, SetTimeActivity.class);
+                                context.startActivity(intent);
+
                             }
-                    });
-                    builder.setNeutralButton("취소", new DialogInterface.OnClickListener() {
+                    }).setNeutralButton("취소", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                                 Toast.makeText(context, "동작이 취소되었습니다.", Toast.LENGTH_LONG).show();
+
                         }
-                    });
+                    }).create().show();
                 }
             });
         }

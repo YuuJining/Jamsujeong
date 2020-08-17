@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class Fragment_forest_assign extends Fragment {
+public class Fragment_forest_check extends Fragment {
     private Context mContext;
 
     GridView gridView;
@@ -38,8 +38,8 @@ public class Fragment_forest_assign extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_forest, container, false);
 
         gridView = (GridView) rootView.findViewById(R.id.seatsView);
-        ButtonAdapter_assign buttonAdapterAssign = new ButtonAdapter_assign(mContext, seatsArray);
-        gridView.setAdapter(buttonAdapterAssign);
+        ButtonAdapter_check buttonAdapterCheck = new ButtonAdapter_check(mContext, seatsArray);
+        gridView.setAdapter(buttonAdapterCheck);
 
         return rootView;
     }

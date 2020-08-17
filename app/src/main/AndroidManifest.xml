@@ -14,7 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 <<<<<<< HEAD
+<<<<<<< HEAD
         <activity android:name=".AssignActivity">
+=======
+        <activity android:name=".SetTimeActivity">
+>>>>>>> 버튼이벤트
             <intent-filter>
                 <action android:name="android.nfc.action.TAG_DISCOVERED"/>
                 <category android:name="android.intent.category.DEFAULT"/>
@@ -22,6 +26,8 @@
         </activity>
 
         <activity android:name=".CheckActivity" />
+
+        <activity android:name=".AssignActivity"/>
 
         <activity android:name=".MainActivity">
 =======
