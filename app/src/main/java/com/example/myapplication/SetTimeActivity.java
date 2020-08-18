@@ -27,12 +27,17 @@ public class SetTimeActivity extends AppCompatActivity {
 
     Context context;
     CountDownTimer countDownTimer;
+<<<<<<< HEAD
     long usingTime = 0;
     long hour = 0;
     long min = 0;
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase database;
     private FirebaseAuth.AuthStateListener authStateListener;
+=======
+    NumberPicker hpicker;
+    NumberPicker mpicker;
+>>>>>>> 38160a79bccfbcf327fc309b49b095a012b5f6e9
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,18 +47,23 @@ public class SetTimeActivity extends AppCompatActivity {
         context = this;
         database.getInstance().getReference();
 
-        final NumberPicker hpicker = (NumberPicker) findViewById(R.id.hpicker);
+        hpicker = (NumberPicker) findViewById(R.id.hpicker);
         hpicker.setMinValue(0);
         hpicker.setMaxValue(2);
-        hpicker.setWrapSelectorWheel(false);
-
-        final NumberPicker mpicker = (NumberPicker) findViewById(R.id.mpicker);
+        mpicker = (NumberPicker) findViewById(R.id.mpicker);
         mpicker.setMinValue(0);
         mpicker.setMaxValue(59);
 
-        if(hpicker.getValue() == 2) {
-            mpicker.setDisplayedValues(new String[] {"0"});
-        }
+        hpicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                if(newVal == 2){
+                    mpicker.setValue(0);
+                    mpicker.setEnabled(false);
+                } else mpicker.setEnabled(true);
+            }
+        });
+
         mpicker.setDisplayedValues(new String[]{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
                                                 "10", "11", "12", "13", "14", "15", "16", "17", "18", "19",
                                                 "20", "21", "22", "23", "24", "25", "26", "27", "28", "29",
