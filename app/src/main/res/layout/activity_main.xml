@@ -13,6 +13,13 @@
         android:background="#D8D8D8">
 
         <TextView
+            android:id="@+id/mainActivity_welcome_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="***님, 환영합니다!"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp" />
+        <TextView
             android:id="@+id/count_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

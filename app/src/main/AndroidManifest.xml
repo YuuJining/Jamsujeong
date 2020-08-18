@@ -26,13 +26,15 @@
         <activity android:name=".AssignActivity"/>
 
         <activity android:name=".MainActivity">
+
+        </activity>
+        <activity android:name=".SignupActivity"></activity>
+        <activity android:name=".LoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignupActivity"></activity>
-        <activity android:name=".LoginActivity" ></activity>
         <receiver android:name=".AlarmReceiver"/>
     </application>
 </manifest>

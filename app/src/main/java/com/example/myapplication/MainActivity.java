@@ -2,25 +2,60 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
     TextView textView;
+    TextView welcome_textview;
+    String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textView = (TextView) findViewById(R.id.count_view);
+        textView = findViewById(R.id.count_view);
+        welcome_textview = findViewById(R.id.mainActivity_welcome_textview);
 
-        Intent passedIntent = getIntent();
-        processIntent(passedIntent);
+        uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        FirebaseDatabase.getInstance().getReference("users").child(uid).child("userName").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot item : dataSnapshot.getChildren()) {
+                    String username = item.getValue().toString();
+                    System.out.println(username);
+                    //welcome_textview.setText(username);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+//        })
+
+//        Intent passedIntent = getIntent();
+//        processIntent(passedIntent);
 
         Button assignButton = (Button) findViewById(R.id.assignButton);
         assignButton.setOnClickListener(new View.OnClickListener() {
@@ -43,13 +78,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void processIntent(Intent intent) {
-        if(intent != null) {
-            String hour = intent.getStringExtra("hours");
-            String min = intent.getStringExtra("minutes");
-            textView.setText(hour + " : " + min);
-        } else {
-            textView.setText("이용 중인 좌석이 없습니다.");
-        }
-    }
+//    private void processIntent(Intent intent) {
+//        if(intent != null) {
+//            String hour = intent.getStringExtra("hours");
+//            String min = intent.getStringExtra("minutes");
+//            textView.setText(hour + " : " + min);
+//        } else {
+//            textView.setText("이용 중인 좌석이 없습니다.");
+//        }
+//    }
 }

@@ -2,63 +2,66 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="300dp"
+    android:layout_height="200dp"
     android:orientation="vertical"
-    android:gravity="center_horizontal"
-    tools:context=".LoginActivity">
+    android:layout_gravity="center"
+    tools:context=".LoginActivity"
+    android:background="#E0E0E0">
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="10dp">
+
         <EditText
             android:id="@+id/loginActivity_edittext_id"
-            android:layout_width="match_parent"
+            android:layout_width="230dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
             android:hint="아이디" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="center">
         <EditText
             android:id="@+id/loginActivity_edittext_password"
-            android:layout_width="match_parent"
+            android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
+            android:layout_marginLeft="15dp"
             android:hint="비밀번호" />
     </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:text="로그인"
-        android:id="@+id/loginActivity_button_login"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"/>
-
-    <Button
-        android:text="회원가입"
-        android:id="@+id/loginActivity_button_signup"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_horizontal">
+        android:orientation="horizontal">
+
         <Button
+            android:id="@+id/loginActivity_button_login"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="70dp"
             android:layout_marginTop="20dp"
-            android:id="@+id/loginActivity_button_uses"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="이용"/>
+            android:background="@drawable/button_background"
+            android:text="로그인"
+            android:textColor="#ffffff"
+            android:textStyle="bold" />
+
         <Button
+            android:id="@+id/loginActivity_button_signup"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="50dp"
             android:layout_marginTop="20dp"
-            android:id="@+id/loginActivity_button_select"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="조회"/>
+            android:background="@drawable/button_background"
+            android:text="회원가입"
+            android:textColor="#ffffff"
+            android:textStyle="bold" />
     </LinearLayout>
 
 </LinearLayout>
