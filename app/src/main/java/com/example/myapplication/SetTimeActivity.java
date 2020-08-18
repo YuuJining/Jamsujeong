@@ -27,18 +27,14 @@ public class SetTimeActivity extends AppCompatActivity {
 
     Context context;
     CountDownTimer countDownTimer;
-<<<<<<< HEAD
     long usingTime = 0;
     long hour = 0;
     long min = 0;
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase database;
     private FirebaseAuth.AuthStateListener authStateListener;
-=======
     NumberPicker hpicker;
     NumberPicker mpicker;
->>>>>>> 38160a79bccfbcf327fc309b49b095a012b5f6e9
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
