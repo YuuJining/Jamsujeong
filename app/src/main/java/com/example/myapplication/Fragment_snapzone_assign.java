@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class Fragment_snapzone extends Fragment {
+public class Fragment_snapzone_assign extends Fragment {
     private Context mContext;
 
     @Override
@@ -42,8 +42,8 @@ public class Fragment_snapzone extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_snapzone, container, false);
 
         gridView = (GridView) rootView.findViewById(R.id.seatsView);
-        ButtonAdapter buttonAdapter = new ButtonAdapter(mContext, seatsArray);
-        gridView.setAdapter(buttonAdapter);
+        ButtonAdapter_assign buttonAdapterAssign = new ButtonAdapter_assign(mContext, seatsArray);
+        gridView.setAdapter(buttonAdapterAssign);
 
         return rootView;
     }
