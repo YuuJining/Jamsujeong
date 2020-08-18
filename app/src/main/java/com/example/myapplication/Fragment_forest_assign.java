@@ -21,6 +21,11 @@ public class Fragment_forest_assign extends Fragment {
             "5", "6", "7", "8"
     };
 
+    Integer[] seatsId = {
+            201, 202, 203, 204,
+            205, 206, 207, 208
+    };
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -38,7 +43,7 @@ public class Fragment_forest_assign extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_forest, container, false);
 
         gridView = (GridView) rootView.findViewById(R.id.seatsView);
-        ButtonAdapter_assign buttonAdapterAssign = new ButtonAdapter_assign(mContext, seatsArray);
+        ButtonAdapter_assign buttonAdapterAssign = new ButtonAdapter_assign(mContext, seatsArray, seatsId);
         gridView.setAdapter(buttonAdapterAssign);
 
         return rootView;

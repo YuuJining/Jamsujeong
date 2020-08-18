@@ -11,21 +11,36 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.NumberPicker;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.Calendar;
 import java.util.Timer;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import model.reservationModel;
 
 public class SetTimeActivity extends AppCompatActivity {
 
     Context context;
     CountDownTimer countDownTimer;
+    long usingTime = 0;
+    long hour = 0;
+    long min = 0;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseDatabase database;
+    private FirebaseAuth.AuthStateListener authStateListener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.set_time);
 
         context = this;
+        database.getInstance().getReference();
 
         final NumberPicker hpicker = (NumberPicker) findViewById(R.id.hpicker);
         hpicker.setMinValue(0);
@@ -47,12 +62,18 @@ public class SetTimeActivity extends AppCompatActivity {
                                                 "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"});
         mpicker.setWrapSelectorWheel(false);
 
+        hour = Long.valueOf(hpicker.getValue());
+        min = Long.valueOf(mpicker.getValue());
+
+        usingTime = hour + min;
+
         Button positive = (Button) findViewById(R.id.button_start);
         positive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String hour = String.valueOf(hpicker.getValue());
-                String min = String.valueOf(mpicker.getValue());
+
+                Intent passedIntent = getIntent();
+                addReservationData(usingTime, passedIntent);
 
                 Intent intent = new Intent(context, MainActivity.class);
                 intent.putExtra("hours", hour);
@@ -85,5 +106,18 @@ public class SetTimeActivity extends AppCompatActivity {
 
             }
         }.start();
+    }
+
+    public void addReservationData(long time, Intent intent) {
+        reservationModel reservation = new reservationModel();
+        reservation.uid = firebaseAuth.getCurrentUser().getUid();
+        reservation.seatNum = intent.getIntExtra("seatId", 101);
+        reservation.alert = true;
+        reservation.startTime = 0;
+        reservation.endTime = reservation.startTime + time;
+        reservation.setTime = time;
+
+        String uid = firebaseAuth.getInstance().getCurrentUser().getUid();
+        FirebaseDatabase.getInstance().getReference().child("reservation").child(uid).setValue(reservation);
     }
 }

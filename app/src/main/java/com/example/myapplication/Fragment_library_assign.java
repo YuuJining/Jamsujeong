@@ -17,10 +17,15 @@ public class Fragment_library_assign extends Fragment {
     GridView gridView;
 
     String[] seatsArray = {
-            "1", "2", "3", "4", "5",
-            "6", "7", "8", "9", "10",
-            "11", "12", "13", "14", "15",
-            "16", "17", "18"
+            "1", "2", "3", "4", "5", "6",
+            "7", "8", "9", "10", "11", "12",
+            "13", "14", "15", "16", "17", "18"
+    };
+
+    Integer[] seatsId = {
+            301, 302, 303, 304, 305, 306,
+            307, 308, 309, 310, 311, 312,
+            313, 314, 315, 316, 317, 318
     };
 
     @Override
@@ -40,7 +45,7 @@ public class Fragment_library_assign extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_library, container, false);
 
         gridView = (GridView) rootView.findViewById(R.id.seatsView);
-        ButtonAdapter_assign buttonAdapterAssign = new ButtonAdapter_assign(mContext, seatsArray);
+        ButtonAdapter_assign buttonAdapterAssign = new ButtonAdapter_assign(mContext, seatsArray, seatsId);
         gridView.setAdapter(buttonAdapterAssign);
 
         return rootView;

@@ -15,12 +15,14 @@ import android.widget.Toast;
 public class ButtonAdapter_assign extends BaseAdapter {
     Context context = null;
     String[] ButtonNames = null;
+    Integer[] ButtonIds = null;
     private LayoutInflater thisInflater;
 
-    public ButtonAdapter_assign(Context context, String[] Buttons) {
+    public ButtonAdapter_assign(Context context, String[] Buttons, Integer[] ButtonIds) {
         this.context = context;
         this.thisInflater = LayoutInflater.from(context);
         ButtonNames = Buttons;
+        this.ButtonIds = ButtonIds;
     }
 
     @Override
@@ -34,9 +36,9 @@ public class ButtonAdapter_assign extends BaseAdapter {
     }
 
     @Override
-    public long getItemId(int position) {
-        return position;
-    }
+    public long getItemId(int position) { return position; }
+
+    public int getSeatsId(int position) { return ButtonIds[position];}
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -57,17 +59,19 @@ public class ButtonAdapter_assign extends BaseAdapter {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    final int seatId = (int) getItemId(position) + 1;
+                    final int seatNum = (int) getItemId(position) + 1;
+                    final int seatId = getSeatsId(position);
 
 //                    Toast.makeText(context,"좌석 " + getItemId(seatId) + "을 이용하겠습니까?", Toast.LENGTH_LONG).show();
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                    builder.setMessage("좌석 " + getItemId(seatId) + "을 이용하시겠습니까?");
+                    builder.setMessage("좌석 " + seatNum + "을 이용하시겠습니까?");
 
                     builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                         @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(context,"좌석 " + getItemId(seatId) + " 선택이 완료되었습니다.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(context,"좌석 " + seatNum + " 선택이 완료되었습니다.", Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(context, SetTimeActivity.class);
+                                intent.putExtra("seatId", seatId);
                                 context.startActivity(intent);
 
                             }

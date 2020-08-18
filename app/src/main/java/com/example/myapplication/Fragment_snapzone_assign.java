@@ -35,6 +35,15 @@ public class Fragment_snapzone_assign extends Fragment {
             "26", "27", "28", "29", "30",
             "31", "32", "33"
     };
+    Integer[] seatsId = {
+            101, 102, 103, 104, 105,
+            106, 107, 108, 109, 110,
+            111, 112, 113, 114, 115,
+            116, 117, 118, 119, 120,
+            121, 122, 123, 124, 125,
+            126, 127, 128, 129, 130,
+            131, 132, 133
+    };
 
     @Nullable
     @Override
@@ -42,7 +51,7 @@ public class Fragment_snapzone_assign extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_snapzone, container, false);
 
         gridView = (GridView) rootView.findViewById(R.id.seatsView);
-        ButtonAdapter_assign buttonAdapterAssign = new ButtonAdapter_assign(mContext, seatsArray);
+        ButtonAdapter_assign buttonAdapterAssign = new ButtonAdapter_assign(mContext, seatsArray, seatsId);
         gridView.setAdapter(buttonAdapterAssign);
 
         return rootView;
