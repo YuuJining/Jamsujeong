@@ -23,46 +23,12 @@ public class AssignActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assign);
 
-//        final Spinner spinner = (Spinner) findViewById(R.id.Spinner);
-//        String[] str = getResources().getStringArray(R.array.location);
-//
-//        final ArrayAdapter<String> adapter= new ArrayAdapter<String>(this, R.layout.spinner_item, str);
-//        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-//        spinner.setAdapter(adapter);
-//
-//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
-
-<<<<<<< HEAD
-        NumberPicker mpicker = (NumberPicker) findViewById(R.id.mpicker);
-        mpicker.setMinValue(0);
-        mpicker.setMaxValue(5);
-        mpicker.setDisplayedValues(new String[]{"0", "10", "20", "30", "40", "50"});
-        mpicker.setWrapSelectorWheel(false);
-
-
-
-        Button positive = (Button) findViewById(R.id.positiveButton);
-        positive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-=======
         pager = (ViewPager) findViewById(R.id.pager);
         pager.setPageTransformer(true, new DepthPageTransformer());
         PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager());
 
         Fragment_snapzone_assign snapzone = new Fragment_snapzone_assign();
         pagerAdapter.addItem(snapzone);
->>>>>>> 811ecb0e0508a0c0db867a33c24ccb0a02c97383
 
         Fragment_forest_assign forest = new Fragment_forest_assign();
         pagerAdapter.addItem(forest);

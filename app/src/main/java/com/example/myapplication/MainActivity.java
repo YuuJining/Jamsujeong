@@ -48,7 +48,8 @@ public class MainActivity extends AppCompatActivity {
             String hour = intent.getStringExtra("hours");
             String min = intent.getStringExtra("minutes");
             textView.setText(hour + " : " + min);
+        } else {
+            textView.setText("이용 중인 좌석이 없습니다.");
         }
-        textView.setText("이용 중인 좌석이 없습니다.");
     }
 }
