@@ -19,6 +19,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import model.UserModel;
+
 public class MainActivity extends AppCompatActivity {
 
     TextView textView;
@@ -35,14 +37,11 @@ public class MainActivity extends AppCompatActivity {
 
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        FirebaseDatabase.getInstance().getReference("users").child(uid).child("userName").addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot item : dataSnapshot.getChildren()) {
-                    String username = item.getValue().toString();
-                    System.out.println(username);
-                    //welcome_textview.setText(username);
-                }
+                UserModel userModel = dataSnapshot.getValue(UserModel.class);
+                welcome_textview.setText(userModel.userName+"님 환영합니다.");
             }
 
             @Override
