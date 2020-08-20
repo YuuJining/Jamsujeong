@@ -36,13 +36,23 @@ public class Fragment_snapzone_check extends Fragment {
             "31", "32", "33"
     };
 
+    Integer[] seatsId = {
+            101, 102, 103, 104, 105,
+            106, 107, 108, 109, 110,
+            111, 112, 113, 114, 115,
+            116, 117, 118, 119, 120,
+            121, 122, 123, 124, 125,
+            126, 127, 128, 129, 130,
+            131, 132, 133
+    };
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_snapzone, container, false);
 
         gridView = (GridView) rootView.findViewById(R.id.seatsView);
-        ButtonAdapter_check buttonAdapterCheck = new ButtonAdapter_check(mContext, seatsArray);
+        ButtonAdapter_check buttonAdapterCheck = new ButtonAdapter_check(mContext, seatsArray, seatsId);
         gridView.setAdapter(buttonAdapterCheck);
 
         return rootView;
