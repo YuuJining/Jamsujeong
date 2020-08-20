@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Timer;
 
@@ -33,6 +34,7 @@ public class SetTimeActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase database;
     private FirebaseAuth.AuthStateListener authStateListener;
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm");
     NumberPicker hpicker;
     NumberPicker mpicker;
     @Override
@@ -116,7 +118,7 @@ public class SetTimeActivity extends AppCompatActivity {
 
     public void addReservationData(long time, Intent intent) {
         reservationModel reservation = new reservationModel();
-        reservation.uid = firebaseAuth.getCurrentUser().getUid();
+        reservation.uid = firebaseAuth.getInstance().getCurrentUser().getUid();
         reservation.seatNum = intent.getIntExtra("seatId", 101);
         reservation.alert = true;
         reservation.startTime = 0;
