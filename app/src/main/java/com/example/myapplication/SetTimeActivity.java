@@ -26,7 +26,6 @@ import model.reservationModel;
 public class SetTimeActivity extends AppCompatActivity {
 
     Context context;
-    CountDownTimer countDownTimer;
     long usingTime = 0;
     long hour = 0;
     long min = 0;
@@ -35,6 +34,7 @@ public class SetTimeActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener authStateListener;
     NumberPicker hpicker;
     NumberPicker mpicker;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,22 +96,6 @@ public class SetTimeActivity extends AppCompatActivity {
                 finish();
             }
         });
-    }
-
-    public void countDown(String hour, String min) {
-        long conversionTime = 0;
-        conversionTime = Long.valueOf(hour) * 1000 * 3600 + Long.valueOf(min) * 60 * 1000;
-        countDownTimer = new CountDownTimer(conversionTime, 60000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-
-            }
-
-            @Override
-            public void onFinish() {
-
-            }
-        }.start();
     }
 
     public void addReservationData(long time, Intent intent) {
