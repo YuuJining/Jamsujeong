@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         welcome_textview = findViewById(R.id.mainActivity_welcome_textview);
 
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
         FirebaseDatabase.getInstance().getReference("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -60,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         assignButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AssignActivity.class);
+                Intent intent = new Intent(getApplicationContext(), NFCRead.class);
                 startActivityForResult(intent, 101);
             }
         });

@@ -3,13 +3,46 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/nfc_img"
+            android:layout_width="174dp"
+            android:layout_height="165dp"
+            android:layout_marginLeft="165dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="280dp"
+            android:src="@drawable/nfc" />
+
+        <ImageView
+            android:id="@+id/smartPhone-img"
+            android:layout_width="291dp"
+            android:layout_height="385dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="140dp"
+            android:src="@drawable/smartphone3" />
+
+    </FrameLayout>
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="5dp"
-        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:text="NFC태그를 단말기에\n 가까이 대주세요."
-        android:textSize="30dp" />
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="100dp"
+        android:text="NFC태그를 단말기에 가까이 대주세요."
+        android:textSize="20dp"
+        />
 </RelativeLayout>

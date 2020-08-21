@@ -23,6 +23,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".LoginActivity" >
+        </activity>
+
         <activity android:name=".SetTimeActivity">
             <intent-filter>
                 <action android:name="android.nfc.action.TAG_DISCOVERED" />
@@ -34,11 +37,9 @@
         <activity android:name=".AssignActivity" />
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".SignupActivity" />
-        <activity android:name=".LoginActivity">
-
-        </activity>
 
         <receiver android:name=".AlarmReceiver" />
+
     </application>
 
 </manifest>
