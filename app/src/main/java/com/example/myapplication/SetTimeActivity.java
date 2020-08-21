@@ -101,16 +101,17 @@ public class SetTimeActivity extends AppCompatActivity {
     }
 
     public void addReservationData(long time, Intent intent) {
+        int seatNum = intent.getIntExtra("seatId", 100);
+
         reservationModel reservation = new reservationModel();
         reservation.uid = firebaseAuth.getInstance().getCurrentUser().getUid();
-        reservation.seatNum = intent.getIntExtra("seatId", 100);
         reservation.alert = true;
         reservation.startTime = 0;
         reservation.endTime = reservation.startTime + time;
         reservation.setTime = time;
 
-        String uid = firebaseAuth.getInstance().getCurrentUser().getUid();
-        FirebaseDatabase.getInstance().getReference().child("reservation").child(uid).setValue(reservation);
+        String seatId = String.valueOf(seatNum);
+        FirebaseDatabase.getInstance().getReference().child("reservation").child(seatId).setValue(reservation);
     }
 
     public void setSeatFlagTrue(Intent intent) {

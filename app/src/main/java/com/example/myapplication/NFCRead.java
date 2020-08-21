@@ -4,6 +4,7 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.nfc.NfcAdapter;
+import android.nfc.tech.NfcF;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -24,10 +25,21 @@ public class NFCRead extends AppCompatActivity {
 
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
 
-        if(nfcAdapter == null) {
-            Toast.makeText(this, "NFC 태그를 활성화 해주세요.", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(this, "NFC 태그를 스캔 중입니다.", Toast.LENGTH_LONG).show();
+        // 인텐트 객체 생성
+        Intent targetIntent = new Intent(this, NFCRead.class);
+        targetIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        mPendingIntent = PendingIntent.getActivity(this, 0, targetIntent, 0);
+
+        //인텐트 필터 객체 생성
+        IntentFilter ndef = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
+        try {
+
+        } catch(IntentFilter.MalformedMimeTypeException e) {
+            throw new RuntimeException("fail", e);
+        }
+
+        if(nfcAdapter != null) {
+            nfcAdapter.enableForegroundDispatch(this, mPendingIntent, mFilters, mTechLists);
         }
 
         Intent intent = new Intent(getApplicationContext(), AssignActivity.class);

@@ -1,12 +1,14 @@
 package com.example.myapplication;
 
 import android.content.Intent;
+import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     TextView textView;
     TextView welcome_textview;
     String uid;
+    private NfcAdapter nfcAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +62,17 @@ public class MainActivity extends AppCompatActivity {
         assignButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), NFCRead.class);
-                startActivityForResult(intent, 101);
+                nfcAdapter = NfcAdapter.getDefaultAdapter(getApplicationContext());
+
+                if(nfcAdapter == null) {
+                    Toast.makeText(getApplicationContext(), "NFC 태그를 활성화 해주세요.", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "NFC 태그를 스캔합니다.", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(getApplicationContext(), NFCRead.class);
+                    startActivityForResult(intent, 101);
+                }
+
+
             }
         });
 
