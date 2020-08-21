@@ -9,6 +9,7 @@ import android.widget.NumberPicker;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 
 import java.text.SimpleDateFormat;
 
@@ -91,17 +92,24 @@ public class SetTimeActivity extends AppCompatActivity {
         });
     }
 
+
     public void addReservationData(long time, Intent intent) {
+<<<<<<< HEAD
         ReservationModel reservation = new ReservationModel();
+=======
+        int seatNum = intent.getIntExtra("seatId", 100);
+
+    public void addReservationData(Object time, Intent intent) {
+        reservationModel reservation = new reservationModel();
+>>>>>>> 06cda67279212eb417777783da6f96b6615187b2
         reservation.uid = firebaseAuth.getInstance().getCurrentUser().getUid();
-        reservation.seatNum = intent.getIntExtra("seatId", 100);
         reservation.alert = true;
-        reservation.startTime = 0;
-        reservation.endTime = reservation.startTime + time;
+        reservation.startTime = ServerValue.TIMESTAMP;
+        //reservation.endTime = reservation.startTime + time;
         reservation.setTime = time;
 
-        String uid = firebaseAuth.getInstance().getCurrentUser().getUid();
-        FirebaseDatabase.getInstance().getReference().child("reservation").child(uid).setValue(reservation);
+        String seatId = String.valueOf(seatNum);
+        FirebaseDatabase.getInstance().getReference().child("reservation").child(seatId).setValue(reservation);
     }
 
     public void setSeatFlagTrue(Intent intent) {
