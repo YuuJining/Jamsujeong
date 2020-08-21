@@ -22,7 +22,6 @@ public class SetTimeActivity extends AppCompatActivity {
     long hour = 0;
     long min = 0;
     private FirebaseAuth firebaseAuth;
-    private FirebaseDatabase database;
     private FirebaseAuth.AuthStateListener authStateListener;
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm");
     NumberPicker hpicker;
@@ -34,7 +33,6 @@ public class SetTimeActivity extends AppCompatActivity {
         setContentView(R.layout.set_time);
 
         context = this;
-        database.getInstance().getReference();
 
         hpicker = (NumberPicker) findViewById(R.id.hpicker);
         hpicker.setMinValue(0);
@@ -73,6 +71,8 @@ public class SetTimeActivity extends AppCompatActivity {
 
                 Intent passedIntent = getIntent();
                 addReservationData(usingTime, passedIntent);
+                setSeatFlagTrue(passedIntent);
+                setUserFlagTrue();
 
                 Intent intent = new Intent(context, MainActivity.class);
                 intent.putExtra("hours", hour);
@@ -94,7 +94,7 @@ public class SetTimeActivity extends AppCompatActivity {
     public void addReservationData(long time, Intent intent) {
         ReservationModel reservation = new ReservationModel();
         reservation.uid = firebaseAuth.getInstance().getCurrentUser().getUid();
-        reservation.seatNum = intent.getIntExtra("seatId", 101);
+        reservation.seatNum = intent.getIntExtra("seatId", 100);
         reservation.alert = true;
         reservation.startTime = 0;
         reservation.endTime = reservation.startTime + time;
@@ -102,5 +102,16 @@ public class SetTimeActivity extends AppCompatActivity {
 
         String uid = firebaseAuth.getInstance().getCurrentUser().getUid();
         FirebaseDatabase.getInstance().getReference().child("reservation").child(uid).setValue(reservation);
+    }
+
+    public void setSeatFlagTrue(Intent intent) {
+        String num = String.valueOf(intent.getIntExtra("seatId", 100));
+        String seatNum = "seat" + num;
+        FirebaseDatabase.getInstance().getReference().child("seat").child(seatNum).child("seatFlag").setValue(true);
+    }
+
+    public void setUserFlagTrue() {
+        String uid = firebaseAuth.getInstance().getCurrentUser().getUid();
+        FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("flag").setValue(true);
     }
 }
