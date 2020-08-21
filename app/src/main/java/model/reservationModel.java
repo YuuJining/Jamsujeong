@@ -3,8 +3,8 @@ package model;
 public class reservationModel {
     public String uid;
     public int seatNum;
-    public long startTime;
-    public long setTime;
-    public long endTime;
+    public Object startTime;
+    public Object setTime;
+    public Object endTime;
     public boolean alert;
 }

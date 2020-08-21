@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextView textView;
     TextView welcome_textview;
+    TextView seatnumber_textview;
     String uid;
 
     @Override
@@ -51,10 +52,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-//        })
 
-//        Intent passedIntent = getIntent();
-//        processIntent(passedIntent);
+        Intent passedIntent = getIntent();
+        processIntent(passedIntent);
 
         Button assignButton = (Button) findViewById(R.id.assignButton);
         assignButton.setOnClickListener(new View.OnClickListener() {
@@ -74,16 +74,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
-//    private void processIntent(Intent intent) {
-//        if(intent != null) {
-//            String hour = intent.getStringExtra("hours");
-//            String min = intent.getStringExtra("minutes");
-//            textView.setText(hour + " : " + min);
-//        } else {
-//            textView.setText("이용 중인 좌석이 없습니다.");
-//        }
-//    }
+    private void processIntent(Intent intent) {
+        if(intent != null) {
+            String hour = intent.getStringExtra("hours");
+            String min = intent.getStringExtra("minutes");
+
+            textView.setText(hour + " : " + min);
+        } else {
+            textView.setText("이용 중인 좌석이 없습니다.");
+        }
+    }
 }
