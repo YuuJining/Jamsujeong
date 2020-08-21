@@ -5,5 +5,4 @@ public class UserModel {
     public String uid;
     public String email;
     public boolean flag;
-    //public boolean reservationFlag;
 }

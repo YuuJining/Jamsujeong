@@ -54,7 +54,7 @@ public class SetTimeActivity extends AppCompatActivity {
         hpicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                if(newVal == 2){
+                if (newVal == 2) {
                     mpicker.setValue(0);
                     mpicker.setEnabled(false);
                 } else mpicker.setEnabled(true);
@@ -62,11 +62,11 @@ public class SetTimeActivity extends AppCompatActivity {
         });
 
         mpicker.setDisplayedValues(new String[]{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
-                                                "10", "11", "12", "13", "14", "15", "16", "17", "18", "19",
-                                                "20", "21", "22", "23", "24", "25", "26", "27", "28", "29",
-                                                "30", "31", "32", "33", "34", "35", "36", "37", "38", "39",
-                                                "40", "41", "42", "43", "44", "45", "46", "47", "48", "49",
-                                                "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"});
+                "10", "11", "12", "13", "14", "15", "16", "17", "18", "19",
+                "20", "21", "22", "23", "24", "25", "26", "27", "28", "29",
+                "30", "31", "32", "33", "34", "35", "36", "37", "38", "39",
+                "40", "41", "42", "43", "44", "45", "46", "47", "48", "49",
+                "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"});
         mpicker.setWrapSelectorWheel(false);
 
         hour = Long.valueOf(hpicker.getValue());
@@ -105,26 +105,26 @@ public class SetTimeActivity extends AppCompatActivity {
     public void addReservationData(long time, Intent intent) {
         int seatNum = intent.getIntExtra("seatId", 100);
 
-    public void addReservationData(Object time, Intent intent) {
-        reservationModel reservation = new reservationModel();
-        reservation.uid = firebaseAuth.getInstance().getCurrentUser().getUid();
-        reservation.alert = true;
-        reservation.startTime = ServerValue.TIMESTAMP;
-        //reservation.endTime = reservation.startTime + time;
-        reservation.setTime = time;
+//        public void addReservationData (Object time, Intent intent){
+            reservationModel reservation = new reservationModel();
+            reservation.uid = firebaseAuth.getInstance().getCurrentUser().getUid();
+            reservation.alert = true;
+            reservation.startTime = ServerValue.TIMESTAMP;
+            //reservation.endTime = reservation.startTime + time;
+            reservation.setTime = time;
 
-        String seatId = String.valueOf(seatNum);
-        FirebaseDatabase.getInstance().getReference().child("reservation").child(seatId).setValue(reservation);
-    }
+            String seatId = String.valueOf(seatNum);
+            FirebaseDatabase.getInstance().getReference().child("reservation").child(seatId).setValue(reservation);
+        }
 
-    public void setSeatFlagTrue(Intent intent) {
-        String num = String.valueOf(intent.getIntExtra("seatId", 100));
-        String seatNum = "seat" + num;
-        FirebaseDatabase.getInstance().getReference().child("seat").child(seatNum).child("seatFlag").setValue(true);
-    }
+        public void setSeatFlagTrue(Intent intent){
+            String num = String.valueOf(intent.getIntExtra("seatId", 100));
+            String seatNum = "seat" + num;
+            FirebaseDatabase.getInstance().getReference().child("seat").child(seatNum).child("seatFlag").setValue(true);
+        }
 
-    public void setUserFlagTrue() {
-        String uid = firebaseAuth.getInstance().getCurrentUser().getUid();
-        FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("flag").setValue(true);
+        public void setUserFlagTrue(){
+            String uid = firebaseAuth.getInstance().getCurrentUser().getUid();
+            FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("flag").setValue(true);
+        }
     }
-}
