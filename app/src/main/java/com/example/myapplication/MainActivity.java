@@ -63,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 nfcAdapter = NfcAdapter.getDefaultAdapter(getApplicationContext());
-
                 if(nfcAdapter == null) {
                     Toast.makeText(getApplicationContext(), "NFC 태그를 활성화 해주세요.", Toast.LENGTH_LONG).show();
                 } else {
