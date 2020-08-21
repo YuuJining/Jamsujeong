@@ -1,4 +1,6 @@
 package com.example.myapplication;
+import android.content.Intent;
+import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -37,6 +39,14 @@ public class AssignActivity extends AppCompatActivity {
         pagerAdapter.addItem(library);
 
         pager.setAdapter(pagerAdapter);
+
+        Intent passedIntent = getIntent();
+        if(passedIntent != null) {
+            String action = passedIntent.getAction();
+            if(NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)) {
+
+            }
+        }
     }
 
     class PagerAdapter extends FragmentStatePagerAdapter {

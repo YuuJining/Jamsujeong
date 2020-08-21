@@ -26,22 +26,36 @@ public class NFCRead extends AppCompatActivity {
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
 
         // 인텐트 객체 생성
-        Intent targetIntent = new Intent(this, NFCRead.class);
+        Intent targetIntent = new Intent(this, AssignActivity.class);
         targetIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         mPendingIntent = PendingIntent.getActivity(this, 0, targetIntent, 0);
 
         //인텐트 필터 객체 생성
         IntentFilter ndef = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
         try {
-
-        } catch(IntentFilter.MalformedMimeTypeException e) {
+            ndef.addDataType("*/*");
+        } catch(Exception e) {
             throw new RuntimeException("fail", e);
         }
 
+        mFilters = new IntentFilter[] {ndef,};
+        mTechLists = new String[][] { new String[] {NfcF.class.getName()} };
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
         if(nfcAdapter != null) {
             nfcAdapter.enableForegroundDispatch(this, mPendingIntent, mFilters, mTechLists);
         }
+    }
 
-        Intent intent = new Intent(getApplicationContext(), AssignActivity.class);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(nfcAdapter != null) {
+            nfcAdapter.disableForegroundDispatch(this);
+        }
     }
 }
