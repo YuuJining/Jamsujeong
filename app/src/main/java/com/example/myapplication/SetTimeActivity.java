@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -100,14 +101,16 @@ public class SetTimeActivity extends AppCompatActivity {
         });
     }
 
+
     public void addReservationData(long time, Intent intent) {
         int seatNum = intent.getIntExtra("seatId", 100);
 
+    public void addReservationData(Object time, Intent intent) {
         reservationModel reservation = new reservationModel();
         reservation.uid = firebaseAuth.getInstance().getCurrentUser().getUid();
         reservation.alert = true;
-        reservation.startTime = 0;
-        reservation.endTime = reservation.startTime + time;
+        reservation.startTime = ServerValue.TIMESTAMP;
+        //reservation.endTime = reservation.startTime + time;
         reservation.setTime = time;
 
         String seatId = String.valueOf(seatNum);

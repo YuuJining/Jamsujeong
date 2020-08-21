@@ -30,7 +30,7 @@
             android:layout_height="385dp"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="140dp"
-            android:src="@drawable/smartPhone3" />
+            android:src="@drawable/smartphone3" />
 
     </FrameLayout>
 
