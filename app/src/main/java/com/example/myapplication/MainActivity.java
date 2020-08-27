@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,11 +32,38 @@ public class MainActivity extends AppCompatActivity {
     TextView seatnumber_textview;
     String uid;
     private NfcAdapter nfcAdapter;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //로그아웃/이용해제 버튼 동작 구현
+        Button logoutButton = (Button) findViewById(R.id.logout_button);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final CharSequence[] items = {"좌석 이용 해제", "로그아웃"};
+                AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                builder.setTitle("이용하고자 하는 항목을 선택해주세요.\n(로그아웃시 좌석이용 내역도 함께 해제됩니다.)");
+                builder.setItems(items, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int index) {
+                        //좌석이용 해제
+                        if(index == 0) {
+
+                        }
+                        //로그아웃
+                        else {
+                            FirebaseAuth.getInstance().signOut();
+                        }
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
 
         textView = findViewById(R.id.count_view);
         welcome_textview = findViewById(R.id.mainActivity_welcome_textview);
