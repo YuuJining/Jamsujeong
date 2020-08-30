@@ -23,6 +23,12 @@ public class Fragment_library_check extends Fragment {
             "16", "17", "18"
     };
 
+    Integer[] seatsId = {
+            301, 302, 303, 304, 305, 306,
+            307, 308, 309, 310, 311, 312,
+            313, 314, 315, 316, 317, 318
+    };
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -40,7 +46,7 @@ public class Fragment_library_check extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_library, container, false);
 
         gridView = (GridView) rootView.findViewById(R.id.seatsView);
-        ButtonAdapter_check buttonAdapterCheck = new ButtonAdapter_check(mContext, seatsArray);
+        ButtonAdapter_check buttonAdapterCheck = new ButtonAdapter_check(mContext, seatsArray, seatsId);
         gridView.setAdapter(buttonAdapterCheck);
 
         return rootView;

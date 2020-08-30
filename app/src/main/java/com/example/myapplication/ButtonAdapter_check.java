@@ -11,15 +11,27 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import model.SeatModel;
+
 public class ButtonAdapter_check extends BaseAdapter {
+
+    private DatabaseReference seat = FirebaseDatabase.getInstance().getReference().child("seat");
+    private DatabaseReference reservation = FirebaseDatabase.getInstance().getReference().child("reservation");
+    SeatModel seatModel;
+
     Context context = null;
     String[] ButtonNames = null;
+    Integer[] ButtonIds = null;
     private LayoutInflater thisInflater;
 
-    public ButtonAdapter_check(Context context, String[] Buttons) {
+    public ButtonAdapter_check(Context context, String[] Buttons, Integer[] ButtonIds) {
         this.context = context;
         this.thisInflater = LayoutInflater.from(context);
         ButtonNames = Buttons;
+        this.ButtonIds = ButtonIds;
     }
 
     @Override
@@ -36,6 +48,8 @@ public class ButtonAdapter_check extends BaseAdapter {
     public long getItemId(int position) {
         return position;
     }
+
+    public int getSeatsId(int position) { return ButtonIds[position];}
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -56,7 +70,8 @@ public class ButtonAdapter_check extends BaseAdapter {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    final int seatId = (int) getItemId(position) + 1;
+                    final int seatNum = (int) getItemId(position) + 1;
+                    final int seatId = getSeatsId(position);
 //
 //                    Toast.makeText(context,"좌석 " + getItemId(seatId) + "을 이용하겠습니까?", Toast.LENGTH_LONG).show();
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);

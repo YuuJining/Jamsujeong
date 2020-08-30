@@ -21,6 +21,12 @@ public class Fragment_forest_check extends Fragment {
             "5", "6", "7", "8"
     };
 
+    Integer[] seatsId = {
+            201, 202, 203, 204,
+            205, 206, 207, 208
+    };
+
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -38,7 +44,7 @@ public class Fragment_forest_check extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_forest, container, false);
 
         gridView = (GridView) rootView.findViewById(R.id.seatsView);
-        ButtonAdapter_check buttonAdapterCheck = new ButtonAdapter_check(mContext, seatsArray);
+        ButtonAdapter_check buttonAdapterCheck = new ButtonAdapter_check(mContext, seatsArray, seatsId);
         gridView.setAdapter(buttonAdapterCheck);
 
         return rootView;
