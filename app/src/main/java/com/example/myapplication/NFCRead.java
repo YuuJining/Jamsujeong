@@ -6,6 +6,7 @@ import android.content.IntentFilter;
 import android.nfc.NfcAdapter;
 import android.nfc.tech.NfcF;
 import android.os.Bundle;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -17,13 +18,14 @@ public class NFCRead extends AppCompatActivity {
     private PendingIntent mPendingIntent;
     private IntentFilter[] mFilters;
     private String[][] mTechLists;
-
+    ProgressBar mProgressBar;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nfc_read);
 
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         // 인텐트 객체 생성
         Intent targetIntent = new Intent(this, AssignActivity.class);

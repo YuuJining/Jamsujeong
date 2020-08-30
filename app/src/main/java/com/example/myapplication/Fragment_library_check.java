@@ -26,7 +26,11 @@ public class Fragment_library_check extends Fragment {
     Integer[] seatsId = {
             301, 302, 303, 304, 305, 306,
             307, 308, 309, 310, 311, 312,
+<<<<<<< HEAD
             313, 314, 315, 316, 317
+=======
+            313, 314, 315, 316, 317, 318
+>>>>>>> 28c8a695bf49abec7bb560fc34a25524b9003853
     };
 
     @Override
