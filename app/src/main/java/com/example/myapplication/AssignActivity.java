@@ -40,13 +40,6 @@ public class AssignActivity extends AppCompatActivity {
 
         pager.setAdapter(pagerAdapter);
 
-        Intent passedIntent = getIntent();
-        if(passedIntent != null) {
-            String action = passedIntent.getAction();
-            if(NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)) {
-
-            }
-        }
     }
 
     class PagerAdapter extends FragmentStatePagerAdapter {
