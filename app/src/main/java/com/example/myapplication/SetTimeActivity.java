@@ -3,6 +3,7 @@ package com.example.myapplication;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.NumberPicker;
@@ -10,8 +11,9 @@ import android.widget.NumberPicker;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
+import com.google.firebase.database.core.Tag;
 
-import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import model.ReservationModel;
@@ -19,12 +21,12 @@ import model.ReservationModel;
 public class SetTimeActivity extends AppCompatActivity {
 
     Context context;
-    long usingTime = 0;
-    long hour = 0;
-    long min = 0;
+    int hour;
+    int min;
+    Calendar pickerTime = Calendar.getInstance();
+    long usingTime;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm");
     NumberPicker hpicker;
     NumberPicker mpicker;
 
@@ -42,16 +44,6 @@ public class SetTimeActivity extends AppCompatActivity {
         mpicker.setMinValue(0);
         mpicker.setMaxValue(59);
 
-        hpicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-            @Override
-            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                if(newVal == 2){
-                    mpicker.setValue(0);
-                    mpicker.setEnabled(false);
-                } else mpicker.setEnabled(true);
-            }
-        });
-
         mpicker.setDisplayedValues(new String[]{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
                                                 "10", "11", "12", "13", "14", "15", "16", "17", "18", "19",
                                                 "20", "21", "22", "23", "24", "25", "26", "27", "28", "29",
@@ -60,10 +52,34 @@ public class SetTimeActivity extends AppCompatActivity {
                                                 "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"});
         mpicker.setWrapSelectorWheel(false);
 
-        hour = Long.valueOf(hpicker.getValue());
-        min = Long.valueOf(mpicker.getValue());
+        hpicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                if(newVal == 2){
+                    mpicker.setValue(0);
+                    mpicker.setEnabled(false);
+                } else mpicker.setEnabled(true);
 
-        usingTime = hour + min;
+                hour = newVal;
+                Log.v("check", "hour : " + hour);
+                pickerTime.set(Calendar.HOUR_OF_DAY, hour);
+            }
+        });
+
+        mpicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                min = newVal;
+                Log.v("check", "min : " + min);
+                pickerTime.set(Calendar.MINUTE, min);
+            }
+        });
+
+
+        Log.v("check", "pickertime : " + pickerTime);
+        usingTime = pickerTime.getTimeInMillis();
+        Log.v("check", "usingtime : " + usingTime);
+
 
         Button positive = (Button) findViewById(R.id.button_start);
         positive.setOnClickListener(new View.OnClickListener() {
@@ -94,18 +110,13 @@ public class SetTimeActivity extends AppCompatActivity {
 
 
     public void addReservationData(long time, Intent intent) {
-<<<<<<< HEAD
-        ReservationModel reservation = new ReservationModel();
-=======
         int seatNum = intent.getIntExtra("seatId", 100);
 
-    public void addReservationData(Object time, Intent intent) {
-        reservationModel reservation = new reservationModel();
->>>>>>> 06cda67279212eb417777783da6f96b6615187b2
+        ReservationModel reservation = new ReservationModel();
         reservation.uid = firebaseAuth.getInstance().getCurrentUser().getUid();
         reservation.alert = true;
         reservation.startTime = ServerValue.TIMESTAMP;
-        //reservation.endTime = reservation.startTime + time;
+        reservation.endTime = (long) reservation.startTime + (long) reservation.setTime;
         reservation.setTime = time;
 
         String seatId = String.valueOf(seatNum);

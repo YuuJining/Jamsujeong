@@ -37,8 +37,6 @@ public class ButtonAdapter_check extends BaseAdapter {
     private DatabaseReference seat = FirebaseDatabase.getInstance().getReference().child("seat");
     private DatabaseReference reservation = FirebaseDatabase.getInstance().getReference().child("reservation");
     SeatModel seatModel;
-    ReservationModel rModel;
-    long leftTime;
 
     Context context = null;
     String[] ButtonNames = null;
@@ -102,23 +100,8 @@ public class ButtonAdapter_check extends BaseAdapter {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             seatModel = dataSnapshot.getValue(SeatModel.class);
                             if (seatModel.seatFlag == true) {
-
-                                final Query rSeat = reservation.orderByChild("seatNum").equalTo(seatId);
-                                rSeat.addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        rModel = dataSnapshot.getValue(ReservationModel.class);
-                                        leftTime = rModel.endTime - rModel.startTime;
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                    }
-                                });
-
                                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                                builder.setMessage("좌석 " + seatNum + ": " + "사용 중" + "\n" + leftTime + "남았습니다.")
+                                builder.setMessage("좌석 " + seatNum + ": " + "사용 중")
                                         .setNeutralButton("확 인", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
