@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(), "NFC 태그를 스캔합니다.", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(getApplicationContext(), NFCRead.class);
-                    startActivityForResult(intent, 101);
+                    startActivityForResult(intent, 100);
                 }
 
 
