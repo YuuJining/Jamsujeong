@@ -3,6 +3,7 @@ package com.example.myapplication;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,30 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+<<<<<<< HEAD
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+
+import model.ReservationModel;
+import model.SeatModel;
+import model.UserModel;
+
+import static android.content.ContentValues.TAG;
+
+
+public class ButtonAdapter_check extends BaseAdapter {
+=======
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -18,6 +43,7 @@ import model.SeatModel;
 
 public class ButtonAdapter_check extends BaseAdapter {
 
+>>>>>>> 28c8a695bf49abec7bb560fc34a25524b9003853
     private DatabaseReference seat = FirebaseDatabase.getInstance().getReference().child("seat");
     private DatabaseReference reservation = FirebaseDatabase.getInstance().getReference().child("reservation");
     SeatModel seatModel;
@@ -26,6 +52,8 @@ public class ButtonAdapter_check extends BaseAdapter {
     String[] ButtonNames = null;
     Integer[] ButtonIds = null;
     private LayoutInflater thisInflater;
+    int seatNum;
+    int seatId;
 
     public ButtonAdapter_check(Context context, String[] Buttons, Integer[] ButtonIds) {
         this.context = context;
@@ -49,14 +77,21 @@ public class ButtonAdapter_check extends BaseAdapter {
         return position;
     }
 
+<<<<<<< HEAD
+    public int getSeatsId(int position) {
+        return ButtonIds[position];
+    }
+
+=======
     public int getSeatsId(int position) { return ButtonIds[position];}
+>>>>>>> 28c8a695bf49abec7bb560fc34a25524b9003853
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         Button button = null;
 
-        if(convertView != null) {
-            button = (Button)convertView;
+        if (convertView != null) {
+            button = (Button) convertView;
         } else {
 
             convertView = thisInflater.inflate(R.layout.grid_item, parent, false);
@@ -70,6 +105,37 @@ public class ButtonAdapter_check extends BaseAdapter {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+<<<<<<< HEAD
+                    seatNum = (int) getItemId(position) + 1;
+                    seatId = getSeatsId(position);
+                    String seatName = "seat" + seatId;
+
+                    seat.child(seatName).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            seatModel = dataSnapshot.getValue(SeatModel.class);
+                            if (seatModel.seatFlag == true) {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                                builder.setMessage("좌석 " + seatNum + ": " + "사용 중")
+                                        .setNeutralButton("확 인", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                Toast.makeText(context, "확인 버튼이 눌렸습니다.", Toast.LENGTH_LONG).show();
+                                            }
+                                        }).create().show();
+                            } else {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                                builder.setMessage("좌석 " + seatNum + ": 사용 가능")
+                                        .setNeutralButton("확 인", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                Toast.makeText(context, "확인 버튼이 눌렸습니다.", Toast.LENGTH_LONG).show();
+                                            }
+                                        }).create().show();
+                            }
+                        }
+
+=======
                     final int seatNum = (int) getItemId(position) + 1;
                     final int seatId = getSeatsId(position);
 //
@@ -77,32 +143,17 @@ public class ButtonAdapter_check extends BaseAdapter {
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setMessage("좌석 " + getItemId(seatId) + ": " + "사용 중" + "\n1시간 30분 남았습니다.")
                     .setNeutralButton("확 인", new DialogInterface.OnClickListener() {
+>>>>>>> 28c8a695bf49abec7bb560fc34a25524b9003853
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(context, "확인 버튼이 눌렸습니다.", Toast.LENGTH_LONG).show();
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
                         }
-                    }).create().show();
-//                    builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
-//                        @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                Toast.makeText(context,"좌석 " + getItemId(seatId) + " 선택이 완료되었습니다.", Toast.LENGTH_LONG).show();
-//                            }
-//                    });
-//                    builder.setNeutralButton("취소", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                                Toast.makeText(context, "동작이 취소되었습니다.", Toast.LENGTH_LONG).show();
-//                        }
-//                    });
+                    });
+
+
                 }
             });
         }
         return button;
     }
-//    class ButtonClickListener implements View.OnClickListener {
-//        @Override
-//        public void onClick(View v) {
-//
-//        }
-//    }
 }

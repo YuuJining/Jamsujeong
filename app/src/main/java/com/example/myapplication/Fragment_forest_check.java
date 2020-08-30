@@ -26,7 +26,10 @@ public class Fragment_forest_check extends Fragment {
             205, 206, 207, 208
     };
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 28c8a695bf49abec7bb560fc34a25524b9003853
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);

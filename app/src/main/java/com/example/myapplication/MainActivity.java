@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(), "NFC 태그를 스캔합니다.", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(getApplicationContext(), NFCRead.class);
-                    startActivityForResult(intent, 100);
+                    startActivityForResult(intent, 102);
                 }
 
 
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), CheckActivity.class);
-                startActivityForResult(intent, 101);
+                startActivityForResult(intent, 103);
             }
         });
 
