@@ -30,7 +30,7 @@ public class NFCRead extends AppCompatActivity {
         // 인텐트 객체 생성
         Intent targetIntent = new Intent(this, AssignActivity.class);
         targetIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        mPendingIntent = PendingIntent.getActivity(this, 0, targetIntent, 0);
+        mPendingIntent = PendingIntent.getActivity(this, 102, targetIntent, 0);
 
         //인텐트 필터 객체 생성
         IntentFilter ndef = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);

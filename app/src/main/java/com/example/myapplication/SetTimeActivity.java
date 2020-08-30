@@ -142,7 +142,6 @@ public class SetTimeActivity extends AppCompatActivity {
     public void addReservationData(long time, Intent intent) {
 >>>>>>> 7f9563fa5a12315589f7d154a2c2ef2d62c6b283
         int seatNum = intent.getIntExtra("seatId", 100);
-
         ReservationModel reservation = new ReservationModel();
         reservation.uid = firebaseAuth.getInstance().getCurrentUser().getUid();
         reservation.alert = true;

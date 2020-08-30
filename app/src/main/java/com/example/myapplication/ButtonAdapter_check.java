@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-<<<<<<< HEAD
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -29,21 +28,9 @@ import java.util.ArrayList;
 
 import model.ReservationModel;
 import model.SeatModel;
-import model.UserModel;
-
-import static android.content.ContentValues.TAG;
-
-
-public class ButtonAdapter_check extends BaseAdapter {
-=======
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import model.SeatModel;
 
 public class ButtonAdapter_check extends BaseAdapter {
 
->>>>>>> 28c8a695bf49abec7bb560fc34a25524b9003853
     private DatabaseReference seat = FirebaseDatabase.getInstance().getReference().child("seat");
     private DatabaseReference reservation = FirebaseDatabase.getInstance().getReference().child("reservation");
     SeatModel seatModel;
@@ -77,14 +64,9 @@ public class ButtonAdapter_check extends BaseAdapter {
         return position;
     }
 
-<<<<<<< HEAD
     public int getSeatsId(int position) {
         return ButtonIds[position];
     }
-
-=======
-    public int getSeatsId(int position) { return ButtonIds[position];}
->>>>>>> 28c8a695bf49abec7bb560fc34a25524b9003853
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -105,7 +87,6 @@ public class ButtonAdapter_check extends BaseAdapter {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-<<<<<<< HEAD
                     seatNum = (int) getItemId(position) + 1;
                     seatId = getSeatsId(position);
                     String seatName = "seat" + seatId;
@@ -135,25 +116,14 @@ public class ButtonAdapter_check extends BaseAdapter {
                             }
                         }
 
-=======
-                    final int seatNum = (int) getItemId(position) + 1;
-                    final int seatId = getSeatsId(position);
-//
-//                    Toast.makeText(context,"좌석 " + getItemId(seatId) + "을 이용하겠습니까?", Toast.LENGTH_LONG).show();
-                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                    builder.setMessage("좌석 " + getItemId(seatId) + ": " + "사용 중" + "\n1시간 30분 남았습니다.")
-                    .setNeutralButton("확 인", new DialogInterface.OnClickListener() {
->>>>>>> 28c8a695bf49abec7bb560fc34a25524b9003853
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
-
                         }
                     });
-
-
                 }
             });
         }
+
         return button;
     }
 }

@@ -19,7 +19,6 @@
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -28,13 +27,16 @@
 
         <activity android:name=".SetTimeActivity">
             <intent-filter>
-                <action android:name="android.nfc.action.TAG_DISCOVERED" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:name=".CheckActivity" />
-        <activity android:name=".AssignActivity" />
+        <activity android:name=".AssignActivity">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.nfc.action.TAG_DISCOVERED" />
+            </intent-filter>
+        </activity>
         <activity android:name=".MainActivity"/>
         <activity android:name=".NFCRead" />
         <activity android:name=".SignupActivity" />

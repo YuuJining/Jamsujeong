@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.nfc.NfcAdapter;
@@ -41,27 +42,26 @@ public class MainActivity extends AppCompatActivity {
 
         //로그아웃/이용해제 버튼 동작 구현
         Button logoutButton = (Button) findViewById(R.id.logout_button);
+        final CharSequence[] items = {"좌석 이용 해제", "로그아웃"};
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final CharSequence[] items = {"좌석 이용 해제", "로그아웃"};
                 AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
-                builder.setTitle("이용하고자 하는 항목을 선택해주세요.\n(로그아웃시 좌석이용 내역도 함께 해제됩니다.)");
+                builder.setTitle("원하시는 동작을 선택해주세요.\n(로그아웃시 좌석이용 내역도 함께 해제됩니다.)");
                 builder.setItems(items, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int index) {
                         //좌석이용 해제
-                        if(index == 0) {
-
+                        if(items[index] == "좌석 이용 해제") {
+                            Toast.makeText(getApplicationContext(), "좌석 이용 해제 선택됨", Toast.LENGTH_LONG).show();
                         }
                         //로그아웃
                         else {
                             FirebaseAuth.getInstance().signOut();
                         }
                     }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
+                }).create().show();
+                Toast.makeText(getApplicationContext(), "로그아웃 버튼이 선택되었습니다.", Toast.LENGTH_LONG).show();
             }
         });
 
