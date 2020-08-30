@@ -7,6 +7,4 @@ public class ReservationModel {
     public Object endTime;
     public boolean alert;
 
-    public ReservationModel() {
-    }
 }
