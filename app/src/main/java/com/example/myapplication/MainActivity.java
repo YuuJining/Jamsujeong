@@ -34,11 +34,14 @@ public class MainActivity extends AppCompatActivity {
     String uid;
     private NfcAdapter nfcAdapter;
     private FirebaseAuth mAuth;
+    private FirebaseDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         //로그아웃/이용해제 버튼 동작 구현
         Button logoutButton = (Button) findViewById(R.id.logout_button);
@@ -46,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setTitle("원하시는 동작을 선택해주세요.\n(로그아웃시 좌석이용 내역도 함께 해제됩니다.)");
                 builder.setItems(items, new DialogInterface.OnClickListener() {
                     @Override
@@ -54,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
                         //좌석이용 해제
                         if(items[index] == "좌석 이용 해제") {
                             Toast.makeText(getApplicationContext(), "좌석 이용 해제 선택됨", Toast.LENGTH_LONG).show();
+                            database.getInstance().getReference().child("users").child(uid).child("flag").setValue(false);
+                            database.getInstance().getReference().child("seat").child(uid).child("flag").setValue(false);
                         }
                         //로그아웃
                         else {
@@ -61,14 +66,12 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 }).create().show();
-                Toast.makeText(getApplicationContext(), "로그아웃 버튼이 선택되었습니다.", Toast.LENGTH_LONG).show();
             }
         });
 
         textView = findViewById(R.id.count_view);
         welcome_textview = findViewById(R.id.mainActivity_welcome_textview);
 
-        uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         FirebaseDatabase.getInstance().getReference("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

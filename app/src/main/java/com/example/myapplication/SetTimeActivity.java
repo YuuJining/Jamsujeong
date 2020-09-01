@@ -21,16 +21,13 @@ import model.ReservationModel;
 public class SetTimeActivity extends AppCompatActivity {
 
     Context context;
-<<<<<<< HEAD
-    int usingTime = 0;
+
+    long usingTime = 0;
     int hour = 0;
     int min = 0;
-=======
-    int hour;
-    int min;
+
     Calendar pickerTime = Calendar.getInstance();
-    long usingTime;
->>>>>>> 7f9563fa5a12315589f7d154a2c2ef2d62c6b283
+
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
     NumberPicker hpicker;
@@ -82,7 +79,6 @@ public class SetTimeActivity extends AppCompatActivity {
             }
         });
 
-<<<<<<< HEAD
         mpicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
@@ -100,13 +96,13 @@ public class SetTimeActivity extends AppCompatActivity {
 
         hour*=60;
         usingTime = hour+min;
-=======
+
 
         Log.v("check", "pickertime : " + pickerTime);
         usingTime = pickerTime.getTimeInMillis();
         Log.v("check", "usingtime : " + usingTime);
 
->>>>>>> 7f9563fa5a12315589f7d154a2c2ef2d62c6b283
+
 
         Button positive = (Button) findViewById(R.id.button_start);
         positive.setOnClickListener(new View.OnClickListener() {
@@ -135,22 +131,18 @@ public class SetTimeActivity extends AppCompatActivity {
         });
     }
 
-<<<<<<< HEAD
-    public void addReservationData(int time, Intent intent) {
-=======
 
     public void addReservationData(long time, Intent intent) {
->>>>>>> 7f9563fa5a12315589f7d154a2c2ef2d62c6b283
         int seatNum = intent.getIntExtra("seatId", 100);
         ReservationModel reservation = new ReservationModel();
         reservation.uid = firebaseAuth.getInstance().getCurrentUser().getUid();
         reservation.alert = true;
         reservation.startTime = ServerValue.TIMESTAMP;
-<<<<<<< HEAD
+
         //reservation.endTime = reservation.startTime+time;
-=======
+
         reservation.endTime = (long) reservation.startTime + (long) reservation.setTime;
->>>>>>> 7f9563fa5a12315589f7d154a2c2ef2d62c6b283
+
         reservation.setTime = time;
 
         String seatId = String.valueOf(seatNum);
