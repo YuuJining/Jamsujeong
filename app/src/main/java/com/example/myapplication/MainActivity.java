@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     TextView welcome_textview;
     TextView seatnumber_textview;
     String uid;
+    String seatNum;
     private NfcAdapter nfcAdapter;
     private FirebaseAuth mAuth;
     private FirebaseDatabase database;
@@ -58,10 +59,12 @@ public class MainActivity extends AppCompatActivity {
                         if(items[index] == "좌석 이용 해제") {
                             Toast.makeText(getApplicationContext(), "좌석 이용 해제 선택됨", Toast.LENGTH_LONG).show();
                             database.getInstance().getReference().child("users").child(uid).child("flag").setValue(false);
-                            database.getInstance().getReference().child("seat").child(uid).child("flag").setValue(false);
+                            database.getInstance().getReference().child("seat").child(uid).child(seatNum).setValue(false);
+                            database.getInstance().getReference().child("reservation").child(seatNum).setValue(null);
                         }
                         //로그아웃
                         else {
+                            Toast.makeText(getApplicationContext(), "로그아웃 선택됨", Toast.LENGTH_LONG).show();
                             FirebaseAuth.getInstance().signOut();
                         }
                     }
