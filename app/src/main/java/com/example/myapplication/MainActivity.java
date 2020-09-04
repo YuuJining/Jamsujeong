@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     TextView welcome_textview;
     TextView seatnumber_textview;
     String uid;
+    String num;
     String seatNum;
     private NfcAdapter nfcAdapter;
     private FirebaseAuth mAuth;
@@ -44,6 +46,18 @@ public class MainActivity extends AppCompatActivity {
 
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+        //사용 중인 좌석 seatNum값 가져오기
+        database.getInstance().getReference("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                UserModel userModel = dataSnapshot.getValue(UserModel.class);
+                num = Integer.toString(userModel.usingSeatNum);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         //로그아웃/이용해제 버튼 동작 구현
         Button logoutButton = (Button) findViewById(R.id.logout_button);
         final CharSequence[] items = {"좌석 이용 해제", "로그아웃"};
@@ -55,12 +69,13 @@ public class MainActivity extends AppCompatActivity {
                 builder.setItems(items, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int index) {
+                        seatNum = "seat" + num;
                         //좌석이용 해제
                         if(items[index] == "좌석 이용 해제") {
                             Toast.makeText(getApplicationContext(), "좌석 이용 해제 선택됨", Toast.LENGTH_LONG).show();
                             database.getInstance().getReference().child("users").child(uid).child("flag").setValue(false);
-                            database.getInstance().getReference().child("seat").child(uid).child(seatNum).setValue(false);
-                            database.getInstance().getReference().child("reservation").child(seatNum).setValue(null);
+                            database.getInstance().getReference().child("seat").child(seatNum).child("seatFlag").setValue(false);
+                            database.getInstance().getReference().child("reservation").child("usingSeatNum").setValue(null);
                         }
                         //로그아웃
                         else {
