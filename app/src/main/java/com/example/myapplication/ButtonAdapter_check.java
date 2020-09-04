@@ -34,6 +34,7 @@ public class ButtonAdapter_check extends BaseAdapter {
     private DatabaseReference seat = FirebaseDatabase.getInstance().getReference().child("seat");
     private DatabaseReference reservation = FirebaseDatabase.getInstance().getReference().child("reservation");
     SeatModel seatModel;
+    ReservationModel reservationModel;
 
     Context context = null;
     String[] ButtonNames = null;
@@ -89,37 +90,50 @@ public class ButtonAdapter_check extends BaseAdapter {
                 public void onClick(View v) {
                     seatNum = (int) getItemId(position) + 1;
                     seatId = getSeatsId(position);
-                    String seatName = "seat" + seatId;
 
-                    seat.child(seatName).addValueEventListener(new ValueEventListener() {
+                    reservation.child(String.valueOf(seatId)).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            seatModel = dataSnapshot.getValue(SeatModel.class);
-                            if (seatModel.seatFlag == true) {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                                builder.setMessage("좌석 " + seatNum + ": " + "사용 중")
-                                        .setNeutralButton("확 인", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                Toast.makeText(context, "확인 버튼이 눌렸습니다.", Toast.LENGTH_LONG).show();
-                                            }
-                                        }).create().show();
-                            } else {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                                builder.setMessage("좌석 " + seatNum + ": 사용 가능")
-                                        .setNeutralButton("확 인", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                Toast.makeText(context, "확인 버튼이 눌렸습니다.", Toast.LENGTH_LONG).show();
-                                            }
-                                        }).create().show();
-                            }
+                            reservationModel = dataSnapshot.getValue(ReservationModel.class);
+
+                            String seatName = "seat" + seatId;
+                            seat.child(seatName).addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    seatModel = dataSnapshot.getValue(SeatModel.class);
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                                    if (seatModel.seatFlag == true) {
+                                        builder.setMessage("좌석 " + seatNum + ": " + "사용 중" + "\n" + reservationModel.startTime + "남았습니다.")
+                                                .setNeutralButton("확 인", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        Toast.makeText(context, "확인 버튼이 눌렸습니다.", Toast.LENGTH_LONG).show();
+                                                    }
+                                                }).create().show();
+                                    } else {
+                                        builder.setMessage("좌석 " + seatNum + ": 사용 가능")
+                                                .setNeutralButton("확 인", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        Toast.makeText(context, "확인 버튼이 눌렸습니다.", Toast.LENGTH_LONG).show();
+                                                    }
+                                                }).create().show();
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                }
+                            });
+
                         }
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
+
                         }
                     });
+
                 }
             });
         }
