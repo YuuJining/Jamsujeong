@@ -27,7 +27,7 @@ public class SetTimeActivity extends AppCompatActivity {
     int min = 0;
 
     Calendar pickerTime = Calendar.getInstance();
-    
+
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
     NumberPicker hpicker;
@@ -79,13 +79,6 @@ public class SetTimeActivity extends AppCompatActivity {
             }
         });
 
-        mpicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-            @Override
-            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                min = newVal;
-            }
-        });
-
 
         Button positive = (Button) findViewById(R.id.button_start);
         positive.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +86,7 @@ public class SetTimeActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent passedIntent = getIntent();
-                addReservationData(usingTime, passedIntent);
+                addReservationData(passedIntent);
                 setSeatFlagTrue(passedIntent);
                 setUserFlagTrue();
 
@@ -115,17 +108,17 @@ public class SetTimeActivity extends AppCompatActivity {
     }
 
 
-    public void addReservationData(long time, Intent intent) {
+    public void addReservationData(Intent intent) {
         int seatNum = intent.getIntExtra("seatId", 100);
         ReservationModel reservation = new ReservationModel();
         reservation.uid = firebaseAuth.getInstance().getCurrentUser().getUid();
         reservation.alert = true;
-        reservation.startTime = ServerValue.TIMESTAMP;
+        //reservation.startTime = ServerValue.TIMESTAMP;
         //reservation.endTime = reservation.startTime+time;
 
-        reservation.endTime = (long) reservation.startTime + (long) reservation.setTime;
+        //reservation.endTime = (long) reservation.startTime + (long) reservation.setTime;
 
-        reservation.setTime = time;
+        //reservation.setTime = time;
 
         String seatId = String.valueOf(seatNum);
         FirebaseDatabase.getInstance().getReference().child("reservation").child(seatId).setValue(reservation);
