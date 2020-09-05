@@ -13,7 +13,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.core.Tag;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import androidx.appcompat.app.AppCompatActivity;
 import model.ReservationModel;
@@ -22,7 +24,7 @@ public class SetTimeActivity extends AppCompatActivity {
 
     Context context;
 
-    long usingTime = 0;
+    int usingTime = 0;
     int hour = 0;
     int min = 0;
 
@@ -32,6 +34,10 @@ public class SetTimeActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener authStateListener;
     NumberPicker hpicker;
     NumberPicker mpicker;
+    long now = System.currentTimeMillis();
+    Date mdate = new Date(now);
+    SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    String currentTime = simpleDate.format(mdate);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +71,6 @@ public class SetTimeActivity extends AppCompatActivity {
                 } else mpicker.setEnabled(true);
 
                 hour = newVal;
-                Log.v("check", "hour : " + hour);
-                pickerTime.set(Calendar.HOUR_OF_DAY, hour);
             }
         });
 
@@ -74,8 +78,6 @@ public class SetTimeActivity extends AppCompatActivity {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
                 min = newVal;
-                Log.v("check", "min : " + min);
-                pickerTime.set(Calendar.MINUTE, min);
             }
         });
 
@@ -86,7 +88,10 @@ public class SetTimeActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent passedIntent = getIntent();
-                addReservationData(passedIntent);
+                hour = Integer.parseInt(String.valueOf(hpicker.getValue()));
+                min = Integer.parseInt(String.valueOf(mpicker.getValue()));
+                usingTime = hour*60 + min;
+                addReservationData(usingTime, passedIntent);
                 setSeatFlagTrue(passedIntent);
                 setUserFlagTrue();
 
@@ -107,18 +112,16 @@ public class SetTimeActivity extends AppCompatActivity {
         });
     }
 
-
-    public void addReservationData(Intent intent) {
+    public void addReservationData(int time, Intent intent) {
         int seatNum = intent.getIntExtra("seatId", 100);
         ReservationModel reservation = new ReservationModel();
         reservation.uid = firebaseAuth.getInstance().getCurrentUser().getUid();
         reservation.alert = true;
-        //reservation.startTime = ServerValue.TIMESTAMP;
-        //reservation.endTime = reservation.startTime+time;
+        reservation.startTime = currentTime;
+        reservation.setTime = time;
 
-        //reservation.endTime = (long) reservation.startTime + (long) reservation.setTime;
-
-        //reservation.setTime = time;
+        pickerTime.add(Calendar.MINUTE,time);
+        reservation.endTime = simpleDate.format(pickerTime.getTime());
 
         String seatId = String.valueOf(seatNum);
         FirebaseDatabase.getInstance().getReference().child("reservation").child(seatId).setValue(reservation);
