@@ -22,10 +22,12 @@ public class SetTimeActivity extends AppCompatActivity {
 
     Context context;
 
-    int hour;
-    int min;
+    long usingTime = 0;
+    int hour = 0;
+    int min = 0;
+
     Calendar pickerTime = Calendar.getInstance();
-    long usingTime;
+    
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
     NumberPicker hpicker;
@@ -85,7 +87,6 @@ public class SetTimeActivity extends AppCompatActivity {
         });
 
 
-
         Button positive = (Button) findViewById(R.id.button_start);
         positive.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,7 +122,9 @@ public class SetTimeActivity extends AppCompatActivity {
         reservation.alert = true;
         reservation.startTime = ServerValue.TIMESTAMP;
         //reservation.endTime = reservation.startTime+time;
+
         reservation.endTime = (long) reservation.startTime + (long) reservation.setTime;
+
         reservation.setTime = time;
 
         String seatId = String.valueOf(seatNum);

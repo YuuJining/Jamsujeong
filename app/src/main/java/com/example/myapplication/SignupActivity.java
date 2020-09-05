@@ -66,6 +66,7 @@ public class SignupActivity extends AppCompatActivity {
                                 userModel.uid = uid;
                                 userModel.email = email.getText().toString();
                                 userModel.flag = false;
+                                userModel.usingSeatNum = 0;
 
                                 FirebaseDatabase.getInstance().getReference().child("users").child(uid).setValue(userModel);
 
