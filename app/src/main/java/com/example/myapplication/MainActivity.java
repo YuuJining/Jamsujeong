@@ -82,6 +82,9 @@ public class MainActivity extends AppCompatActivity {
                         else {
                             Toast.makeText(getApplicationContext(), "로그아웃 선택됨", Toast.LENGTH_LONG).show();
                             FirebaseAuth.getInstance().signOut();
+                            database.getInstance().getReference().child("users").child(uid).child("flag").setValue(false);
+                            database.getInstance().getReference().child("seat").child(seatNum).child("seatFlag").setValue(false);
+                            database.getInstance().getReference().child("reservation").child("usingSeatNum").setValue(null);
                         }
                     }
                 }).create().show();
