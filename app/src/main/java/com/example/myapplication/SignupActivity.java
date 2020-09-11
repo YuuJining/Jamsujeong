@@ -75,14 +75,14 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }
 
-                            UserModel userModel = new UserModel();
+                UserModel userModel = new UserModel();
 
-                                final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-                                userModel.userName = name.getText().toString();
-                                userModel.uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                userModel.userName = name.getText().toString();
+                userModel.uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-                                FirebaseDatabase.getInstance().getReference().child("users").child(uid).setValue(userModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+                FirebaseDatabase.getInstance().getReference().child("users").child(uid).setValue(userModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         SignupActivity.this.finish();
@@ -94,10 +94,9 @@ public class SignupActivity extends AppCompatActivity {
                                 userModel.email = email.getText().toString();
                                 userModel.flag = false;
                                 userModel.usingSeatNum = 0;
-
                                 FirebaseDatabase.getInstance().getReference().child("users").child(uid).setValue(userModel);
 
-                            }
-                        });
-                }
-        }
+            }
+        });
+    }
+}
