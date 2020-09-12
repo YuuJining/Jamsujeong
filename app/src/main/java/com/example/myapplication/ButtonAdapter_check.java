@@ -3,6 +3,7 @@ package com.example.myapplication;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import model.ReservationModel;
 import model.SeatModel;
 
@@ -28,6 +34,12 @@ public class ButtonAdapter_check extends BaseAdapter {
     private DatabaseReference reservation = FirebaseDatabase.getInstance().getReference().child("reservation");
     SeatModel seatModel;
     ReservationModel reservationModel;
+
+    SimpleDateFormat hourFormat = new SimpleDateFormat("hh");
+    SimpleDateFormat minFormat = new SimpleDateFormat("mm");
+    Calendar now;
+    int leftHour = 0;
+    int leftMin = 0;
 
     Context context = null;
     String[] ButtonNames = null;
@@ -96,7 +108,11 @@ public class ButtonAdapter_check extends BaseAdapter {
                                     seatModel = dataSnapshot.getValue(SeatModel.class);
                                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                                     if (seatModel.seatflag == true) {
-                                        builder.setMessage("좌석 " + seatNum + ": " + "사용 중" + "\n" + reservationModel.endTime + "까지 사용")
+                                        now = Calendar.getInstance();
+                                        leftHour = Integer.parseInt(hourFormat.format(reservationModel.endTime)) - Integer.parseInt(hourFormat.format(now.getTime()));
+                                        leftMin = Integer.parseInt(minFormat.format(reservationModel.endTime)) - Integer.parseInt(minFormat.format(now.getTime()));
+//                                        builder.setMessage("좌석 " + seatNum + ": " + "사용 중" + "\n" + reservationModel.endTime + "까지 사용")
+                                        builder.setMessage("좌석 " + seatNum + ": " + "사용 중" + "\n" + leftHour + "시간 " + leftMin + "분 남았습니다.")
                                                 .setNeutralButton("확 인", new DialogInterface.OnClickListener() {
                                                     @Override
                                                     public void onClick(DialogInterface dialog, int which) {

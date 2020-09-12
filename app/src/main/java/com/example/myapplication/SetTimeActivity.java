@@ -117,11 +117,11 @@ public class SetTimeActivity extends AppCompatActivity {
         ReservationModel reservation = new ReservationModel();
         reservation.uid = firebaseAuth.getInstance().getCurrentUser().getUid();
         reservation.alert = true;
-        reservation.startTime = currentTime;
+        reservation.startTime = now;
         reservation.setTime = time;
 
         pickerTime.add(Calendar.MINUTE,time);
-        reservation.endTime = simpleDate.format(pickerTime.getTime());
+        reservation.endTime = pickerTime.getTimeInMillis();
 
         String seatId = String.valueOf(seatNum);
         FirebaseDatabase.getInstance().getReference().child("reservation").child(seatId).setValue(reservation);
@@ -148,7 +148,7 @@ public class SetTimeActivity extends AppCompatActivity {
     public void setSeatFlagTrue(Intent intent) {
         String num = String.valueOf(intent.getIntExtra("seatId", 100));
         String seatNum = "seat" + num;
-        FirebaseDatabase.getInstance().getReference().child("seat").child(seatNum).child("seatFlag").setValue(true);
+        FirebaseDatabase.getInstance().getReference().child("seat").child(seatNum).child("seatflag").setValue(true);
     }
 
     public void setUserFlagTrue() {
