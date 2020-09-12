@@ -24,7 +24,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import model.ReservationModel;
 import model.SeatModel;
@@ -103,7 +105,7 @@ public class ButtonAdapter_check extends BaseAdapter {
                                     seatModel = dataSnapshot.getValue(SeatModel.class);
                                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                                     if (seatModel.seatFlag == true) {
-                                        builder.setMessage("좌석 " + seatNum + ": " + "사용 중" + "\n" + reservationModel.startTime + "남았습니다.")
+                                        builder.setMessage("좌석 " + seatNum + ": " + "사용 중" + "\n" + reservationModel.endTime + "까지 사용")
                                                 .setNeutralButton("확 인", new DialogInterface.OnClickListener() {
                                                     @Override
                                                     public void onClick(DialogInterface dialog, int which) {
