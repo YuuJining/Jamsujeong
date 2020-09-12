@@ -94,6 +94,7 @@ public class SetTimeActivity extends AppCompatActivity {
                 addReservationData(usingTime, passedIntent);
                 setSeatFlagTrue(passedIntent);
                 setUserFlagTrue();
+                setValue_usingSeatNum(passedIntent);
 
                 Intent intent = new Intent(context, MainActivity.class);
                 intent.putExtra("hours", hour);
@@ -154,5 +155,11 @@ public class SetTimeActivity extends AppCompatActivity {
     public void setUserFlagTrue() {
         String uid = firebaseAuth.getInstance().getCurrentUser().getUid();
         FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("flag").setValue(true);
+    }
+
+    public void setValue_usingSeatNum(Intent intent) {
+        int num = intent.getIntExtra("seatId", 100);
+        String uid = firebaseAuth.getInstance().getCurrentUser().getUid();
+        FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("usingSeatNum").setValue(num);
     }
 }

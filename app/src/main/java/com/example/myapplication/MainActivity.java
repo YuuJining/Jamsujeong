@@ -75,16 +75,18 @@ public class MainActivity extends AppCompatActivity {
                         if(items[index] == "좌석 이용 해제") {
                             Toast.makeText(getApplicationContext(), "좌석 이용 해제 선택됨", Toast.LENGTH_LONG).show();
                             database.getInstance().getReference().child("users").child(uid).child("flag").setValue(false);
-                            database.getInstance().getReference().child("seat").child(seatNum).child("seatFlag").setValue(false);
-                            database.getInstance().getReference().child("reservation").child("usingSeatNum").setValue(null);
+                            database.getInstance().getReference().child("users").child(uid).child("usingSeatNum").setValue(0);
+                            database.getInstance().getReference().child("seat").child(seatNum).child("seatflag").setValue(false);
+                            database.getInstance().getReference().child("reservation").child(num).removeValue();
                         }
                         //로그아웃
                         else {
                             Toast.makeText(getApplicationContext(), "로그아웃 선택됨", Toast.LENGTH_LONG).show();
                             FirebaseAuth.getInstance().signOut();
                             database.getInstance().getReference().child("users").child(uid).child("flag").setValue(false);
-                            database.getInstance().getReference().child("seat").child(seatNum).child("seatFlag").setValue(false);
-                            database.getInstance().getReference().child("reservation").child("usingSeatNum").setValue(null);
+                            database.getInstance().getReference().child("users").child(uid).child("usingSeatNum").setValue(0);
+                            database.getInstance().getReference().child("seat").child(seatNum).child("seatflag").setValue(false);
+                            database.getInstance().getReference().child("reservation").child(num).removeValue();
                         }
                     }
                 }).create().show();
