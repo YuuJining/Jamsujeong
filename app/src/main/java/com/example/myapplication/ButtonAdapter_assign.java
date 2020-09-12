@@ -12,11 +12,22 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import androidx.annotation.NonNull;
+import model.SeatModel;
+
 public class ButtonAdapter_assign extends BaseAdapter {
     Context context = null;
     String[] ButtonNames = null;
     Integer[] ButtonIds = null;
     private LayoutInflater thisInflater;
+    private DatabaseReference seat = FirebaseDatabase.getInstance().getReference().child("seat");
+    SeatModel seatModel;
 
     public ButtonAdapter_assign(Context context, String[] Buttons, Integer[] ButtonIds) {
         this.context = context;
@@ -61,6 +72,17 @@ public class ButtonAdapter_assign extends BaseAdapter {
                 public void onClick(View v) {
                     final int seatNum = (int) getItemId(position) + 1;
                     final int seatId = getSeatsId(position);
+                    String seatName = "seat" + seatId;
+                    seat.child(seatName).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            seatModel = dataSnapshot.getValue(SeatModel.class);
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
 
 //                    Toast.makeText(context,"좌석 " + getItemId(seatId) + "을 이용하겠습니까?", Toast.LENGTH_LONG).show();
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -69,10 +91,17 @@ public class ButtonAdapter_assign extends BaseAdapter {
                     builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                         @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(context,"좌석 " + seatNum + " 선택이 완료되었습니다.", Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(context, SetTimeActivity.class);
-                                intent.putExtra("seatId", seatId);
-                                context.startActivity(intent);
+                                if(seatModel.seatFlag == true) {
+                                    Toast.makeText(context, "이미 사용 중인 좌석입니다.", Toast.LENGTH_LONG).show();
+//                                    Intent intent = new Intent(context, SetTimeActivity.class);
+//                                    intent.putExtra("seatId", seatId);
+//                                    context.startActivity(intent);
+                                } else {
+                                    Toast.makeText(context, "좌석 " + seatNum + " 선택이 완료되었습니다.", Toast.LENGTH_LONG).show();
+                                    Intent intent = new Intent(context, SetTimeActivity.class);
+                                    intent.putExtra("seatId", seatId);
+                                    context.startActivity(intent);
+                                }
 
                             }
                     }).setNeutralButton("취소", new DialogInterface.OnClickListener() {

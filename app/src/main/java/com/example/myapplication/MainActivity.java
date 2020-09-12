@@ -25,6 +25,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import model.ReservationModel;
 import model.UserModel;
 
 public class MainActivity extends AppCompatActivity {
@@ -81,6 +82,9 @@ public class MainActivity extends AppCompatActivity {
                         else {
                             Toast.makeText(getApplicationContext(), "로그아웃 선택됨", Toast.LENGTH_LONG).show();
                             FirebaseAuth.getInstance().signOut();
+                            database.getInstance().getReference().child("users").child(uid).child("flag").setValue(false);
+                            database.getInstance().getReference().child("seat").child(seatNum).child("seatFlag").setValue(false);
+                            database.getInstance().getReference().child("reservation").child("usingSeatNum").setValue(null);
                         }
                     }
                 }).create().show();
@@ -102,6 +106,20 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
+//        FirebaseDatabase.getInstance().getReference("reservation").child().addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                ReservationModel reservationModel = dataSnapshot.getValue(ReservationModel.class);
+//                textView.setText(reservationModel.endTime+"\n까지 예약 중 입니다.");
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
 
 
 
@@ -141,7 +159,8 @@ public class MainActivity extends AppCompatActivity {
             String hour = intent.getStringExtra("hours");
             String min = intent.getStringExtra("minutes");
 
-            textView.setText(hour + " : " + min);
+
+            textView.setText("");
         } else {
             textView.setText("이용 중인 좌석이 없습니다.");
         }
