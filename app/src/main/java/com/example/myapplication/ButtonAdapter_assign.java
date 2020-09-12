@@ -91,7 +91,7 @@ public class ButtonAdapter_assign extends BaseAdapter {
                     builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                         @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                if(seatModel.seatFlag == true) {
+                                if(seatModel.seatflag == true) {
                                     Toast.makeText(context, "이미 사용 중인 좌석입니다.", Toast.LENGTH_LONG).show();
 //                                    Intent intent = new Intent(context, SetTimeActivity.class);
 //                                    intent.putExtra("seatId", seatId);

@@ -3,7 +3,6 @@ package com.example.myapplication;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,20 +12,12 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 
 import model.ReservationModel;
 import model.SeatModel;
@@ -104,7 +95,7 @@ public class ButtonAdapter_check extends BaseAdapter {
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                     seatModel = dataSnapshot.getValue(SeatModel.class);
                                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                                    if (seatModel.seatFlag == true) {
+                                    if (seatModel.seatflag == true) {
                                         builder.setMessage("좌석 " + seatNum + ": " + "사용 중" + "\n" + reservationModel.endTime + "까지 사용")
                                                 .setNeutralButton("확 인", new DialogInterface.OnClickListener() {
                                                     @Override
