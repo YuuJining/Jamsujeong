@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     String uid;
     String num;
     String seatNum;
+    boolean userFlag;
     private NfcAdapter nfcAdapter;
     private FirebaseAuth mAuth;
     private FirebaseDatabase database;
@@ -47,18 +48,24 @@ public class MainActivity extends AppCompatActivity {
 
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        //사용 중인 좌석 seatNum값 가져오기
+        textView = findViewById(R.id.count_view);
+        welcome_textview = findViewById(R.id.mainActivity_welcome_textview);
+
+        //사용 중인 좌석 seatNum값 가져오기 & 사용자 이름 설정
         database.getInstance().getReference("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 UserModel userModel = dataSnapshot.getValue(UserModel.class);
+                welcome_textview.setText(userModel.userName+"님 환영합니다.");
                 num = Integer.toString(userModel.usingSeatNum);
+                userFlag = userModel.flag;
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
+
         //로그아웃/이용해제 버튼 동작 구현
         Button logoutButton = (Button) findViewById(R.id.logout_button);
         final CharSequence[] items = {"좌석 이용 해제", "로그아웃"};
@@ -81,33 +88,35 @@ public class MainActivity extends AppCompatActivity {
                         }
                         //로그아웃
                         else {
+                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                             Toast.makeText(getApplicationContext(), "로그아웃 선택됨", Toast.LENGTH_LONG).show();
                             FirebaseAuth.getInstance().signOut();
                             database.getInstance().getReference().child("users").child(uid).child("flag").setValue(false);
                             database.getInstance().getReference().child("users").child(uid).child("usingSeatNum").setValue(0);
                             database.getInstance().getReference().child("seat").child(seatNum).child("seatflag").setValue(false);
                             database.getInstance().getReference().child("reservation").child(num).removeValue();
+                            startActivityForResult(intent, 200);
+
                         }
                     }
                 }).create().show();
             }
         });
 
-        textView = findViewById(R.id.count_view);
-        welcome_textview = findViewById(R.id.mainActivity_welcome_textview);
 
-        FirebaseDatabase.getInstance().getReference("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                UserModel userModel = dataSnapshot.getValue(UserModel.class);
-                welcome_textview.setText(userModel.userName+"님 환영합니다.");
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+//        FirebaseDatabase.getInstance().getReference("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                UserModel userModel = dataSnapshot.getValue(UserModel.class);
+//                welcome_textview.setText(userModel.userName+"님 환영합니다.");
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
 
 
 //        FirebaseDatabase.getInstance().getReference("reservation").child().addListenerForSingleValueEvent(new ValueEventListener() {
@@ -123,8 +132,6 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
-
-
         Intent passedIntent = getIntent();
         processIntent(passedIntent);
 
@@ -133,15 +140,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 nfcAdapter = NfcAdapter.getDefaultAdapter(getApplicationContext());
-                if(nfcAdapter == null) {
-                    Toast.makeText(getApplicationContext(), "NFC 태그를 활성화 해주세요.", Toast.LENGTH_LONG).show();
+                if(userFlag == true) {
+                    Toast.makeText(getApplicationContext(), "먼저 이용 중인 좌석을 해제해주세요!", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), "NFC 태그를 스캔합니다.", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(getApplicationContext(), NFCRead.class);
-                    startActivityForResult(intent, 102);
+                    if (nfcAdapter == null) {
+                        Toast.makeText(getApplicationContext(), "NFC 태그를 활성화 해주세요.", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "NFC 태그를 스캔합니다.", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(getApplicationContext(), NFCRead.class);
+                        startActivityForResult(intent, 102);
+                    }
                 }
-
-
             }
         });
 
@@ -160,8 +169,6 @@ public class MainActivity extends AppCompatActivity {
         if(intent != null) {
             String hour = intent.getStringExtra("hours");
             String min = intent.getStringExtra("minutes");
-
-
             textView.setText("");
         } else {
             textView.setText("이용 중인 좌석이 없습니다.");
