@@ -38,6 +38,27 @@
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/signupActivity_edittext_password_check"
+            android:hint="패스워드 확인"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/signupActivity_textview_password_check"
+        android:textSize="9dp"
+        android:layout_marginLeft="5dp"
+        android:text="패스워드가 일치하지 않습니다."
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#FF0000"/>
+
     <Button
         android:text="이메일인증"
         android:id="@+id/signupActivity_button_verifier"

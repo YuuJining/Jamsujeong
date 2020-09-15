@@ -5,10 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,6 +30,8 @@ public class SignupActivity extends AppCompatActivity {
     private EditText email;
     private EditText name;
     private EditText password;
+    private EditText password_check;
+    private TextView password_check_text;
     private Button signup;
     private Button verifier;
 
@@ -40,6 +45,29 @@ public class SignupActivity extends AppCompatActivity {
         password = findViewById(R.id.signupActivity_edittext_password);
         signup = findViewById(R.id.signupActivity_button_signup);
         verifier = findViewById(R.id.signupActivity_button_verifier);
+        password_check = findViewById(R.id.signupActivity_edittext_password_check);
+        password_check_text = findViewById(R.id.signupActivity_textview_password_check);
+
+        password_check.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.toString().equals(password.getText().toString())) {
+                    password_check_text.setVisibility(View.VISIBLE);
+                    password_check_text.setText("패스워드가 일치합니다.");
+                }else {
+                    password_check_text.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
 
         verifier.setOnClickListener(new View.OnClickListener() {
             @Override
