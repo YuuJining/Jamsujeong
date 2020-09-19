@@ -128,24 +128,6 @@ public class SetTimeActivity extends AppCompatActivity {
         FirebaseDatabase.getInstance().getReference().child("reservation").child(seatId).setValue(reservation);
     }
 
-    /* reservation데이터베이스에 child를 seatId가 아닌 uid로 했을 때의 addReservationData함수
-//    public void addReservationData2(int time, Intent intent) {
-//        int seatNum = intent.getIntExtra("seatId", 100);
-//        final String uid = firebaseAuth.getInstance().getCurrentUser().getUid();
-//        String seatId = String.valueOf(seatNum);
-//        ReservationModel reservation = new ReservationModel();
-//        reservation.alert = true;
-//        reservation.startTime = currentTime;
-//        reservation.setTime = time;
-//        reservation.seatNumber = seatId;
-//
-//        pickerTime.add(Calendar.MINUTE,time);
-//        reservation.endTime = simpleDate.format(pickerTime.getTime());
-//
-//        FirebaseDatabase.getInstance().getReference().child("reservation").child(uid).setValue(reservation);
-//    }
-    지우지마세요 */
-
     public void setSeatFlagTrue(Intent intent) {
         String num = String.valueOf(intent.getIntExtra("seatId", 100));
         String seatNum = "seat" + num;

@@ -2,9 +2,9 @@ package model;
 
 public class ReservationModel {
     public String uid;
-    public Object startTime;
+    public long startTime;
     public Object setTime;
-    public Object endTime;
+    public long endTime;
     public boolean alert;
     //public String seatNumber;
 

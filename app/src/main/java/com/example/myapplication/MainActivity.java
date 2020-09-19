@@ -25,6 +25,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import model.ReservationModel;
 import model.UserModel;
 
@@ -50,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         textView = findViewById(R.id.count_view);
         welcome_textview = findViewById(R.id.mainActivity_welcome_textview);
-
+        seatnumber_textview = findViewById(R.id.mainActivity_seatnum_textview);
         //사용 중인 좌석 seatNum값 가져오기 & 사용자 이름 설정
         database.getInstance().getReference("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -59,6 +62,40 @@ public class MainActivity extends AppCompatActivity {
                 welcome_textview.setText(userModel.userName+"님 환영합니다.");
                 num = Integer.toString(userModel.usingSeatNum);
                 userFlag = userModel.flag;
+
+                if(Integer.parseInt(num) != 0) {
+                    database.getInstance().getReference("reservation").child(num).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            ReservationModel reservationModel = dataSnapshot.getValue(ReservationModel.class);
+                            Date reservationEndTime = new Date(reservationModel.endTime);
+                            SimpleDateFormat simpleDate = new SimpleDateFormat("hh시 mm분");
+                            String endTime = simpleDate.format(reservationEndTime);
+                            textView.setText(endTime+"까지 이용 가능합니다.");
+
+                            if(Integer.parseInt(num) > 100 && Integer.parseInt(num) < 135) {
+                                seatnumber_textview.setVisibility(View.VISIBLE);
+                                int realNumber = Integer.parseInt(num)-100;
+                                seatnumber_textview.setText("snapzone "+realNumber+"번 좌석");
+                            }else if(Integer.parseInt(num) > 200 && Integer.parseInt(num) < 210) {
+                                seatnumber_textview.setVisibility(View.VISIBLE);
+                                int realNumber = Integer.parseInt(num)-200;
+                                seatnumber_textview.setText("forest "+realNumber+"번 좌석");
+                            }else {
+                                seatnumber_textview.setVisibility(View.VISIBLE);
+                                int realNumber = Integer.parseInt(num)-300;
+                                seatnumber_textview.setText("library "+realNumber+"번 좌석");
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                } else {
+                    textView.setText("이용 중인 좌석이 없습니다.");
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -103,37 +140,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
-//        FirebaseDatabase.getInstance().getReference("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                UserModel userModel = dataSnapshot.getValue(UserModel.class);
-//                welcome_textview.setText(userModel.userName+"님 환영합니다.");
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
-
-
-//        FirebaseDatabase.getInstance().getReference("reservation").child().addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                ReservationModel reservationModel = dataSnapshot.getValue(ReservationModel.class);
-//                textView.setText(reservationModel.endTime+"\n까지 예약 중 입니다.");
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
-
-        Intent passedIntent = getIntent();
-        processIntent(passedIntent);
+//        Intent passedIntent = getIntent();
+//        processIntent(passedIntent);
 
         Button assignButton = (Button) findViewById(R.id.assignButton);
         assignButton.setOnClickListener(new View.OnClickListener() {
