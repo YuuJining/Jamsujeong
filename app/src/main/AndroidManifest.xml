@@ -36,6 +36,7 @@
         <activity android:name=".CheckActivity" />
         <activity android:name=".AssignActivity">
             <intent-filter>
+                <action android:name="android.nfc.action.TAG_DISCOVERED" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
