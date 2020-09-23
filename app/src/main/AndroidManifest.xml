@@ -49,7 +49,7 @@
         <activity android:name=".NFCRead" >
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
-                <action android:name="android.nfc.action.TAG_DISCOVERED" />
+<!--                <action android:name="android.nfc.action.TAG_DISCOVERED" />-->
             </intent-filter>
         </activity>
         <activity android:name=".SignupActivity" />
