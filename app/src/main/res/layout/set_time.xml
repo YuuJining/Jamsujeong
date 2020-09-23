@@ -85,25 +85,21 @@
 
     <LinearLayout
         android:id="@+id/alerts"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:layout_width="235dp"
+        android:layout_height="59dp"
         android:layout_below="@+id/time_pick"
-        android:layout_marginHorizontal="80dp"
-        android:layout_marginVertical="20dp"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginHorizontal="130dp"
+        android:layout_marginEnd="95dp"
         android:orientation="horizontal">
-        <CheckBox
-            android:id="@+id/fiveMinAlert"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
 
-            android:text="5분전 알람" />
         <CheckBox
             android:id="@+id/tenMinAlert"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:text="10분전 알람" />
+            android:text="알람으로 깨워주세요"
+            android:textSize="20dp" />
     </LinearLayout>
 
 </RelativeLayout>

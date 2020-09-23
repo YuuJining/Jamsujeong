@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
+import android.app.AlarmManager;
 import android.app.Dialog;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.nfc.NfcAdapter;
@@ -9,6 +11,7 @@ import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,9 +29,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import model.ReservationModel;
+import model.SeatModel;
 import model.UserModel;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,10 +44,16 @@ public class MainActivity extends AppCompatActivity {
     String uid;
     String num;
     String seatNum;
+    String usingSeatNum;
     boolean userFlag;
     private NfcAdapter nfcAdapter;
     private FirebaseAuth mAuth;
     private FirebaseDatabase database;
+    private DatabaseReference currentUser;
+    private DatabaseReference reservation = FirebaseDatabase.getInstance().getReference().child("reservation");
+    private Calendar alarmTime = Calendar.getInstance();
+    UserModel currentU;
+    ReservationModel currentR;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        currentUser = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
 
         textView = findViewById(R.id.count_view);
         welcome_textview = findViewById(R.id.mainActivity_welcome_textview);
@@ -64,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 userFlag = userModel.flag;
 
                 if(Integer.parseInt(num) != 0) {
-                    database.getInstance().getReference("reservation").child(num).addListenerForSingleValueEvent(new ValueEventListener() {
+                    database.getInstance().getReference("reservation").child(num).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             ReservationModel reservationModel = dataSnapshot.getValue(ReservationModel.class);
@@ -100,6 +112,37 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+
+        //새로고침 누르면 시간 지난 reservation 삭제
+        Button refreshButton = (Button) findViewById(R.id.refresh_button);
+        refreshButton.setOnClickListener(new View.OnClickListener() {
+            long now = Calendar.getInstance().getTimeInMillis();
+            @Override
+            public void onClick(View v) {
+                reservation.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for(DataSnapshot ds : dataSnapshot.getChildren()){
+                            ReservationModel rmodel = ds.getValue(ReservationModel.class);
+                            if((long) rmodel.endTime < now){
+                                database.getInstance().getReference().child("users").child(rmodel.uid).child("flag").setValue(false);
+                                database.getInstance().getReference().child("users").child(rmodel.uid).child("usingSeatNum").setValue(0);
+                                seatNum = "seat" + ds.getKey();
+                                database.getInstance().getReference().child("seat").child(seatNum).child("seatflag").setValue(false);
+                                reservation.child(ds.getKey()).removeValue();
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+                Toast.makeText(getApplicationContext(), "새로고침 완료", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -171,6 +214,33 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //알람 구현
+        currentUser.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                currentU = dataSnapshot.getValue(UserModel.class);
+                if(currentU.flag == true) {
+                    reservation.child(String.valueOf(currentU.usingSeatNum)).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            currentR = dataSnapshot.getValue(ReservationModel.class);
+                            if (currentR.alert == true) setAlarm();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     @Override
@@ -206,4 +276,20 @@ public class MainActivity extends AppCompatActivity {
             textView.setText("이용 중인 좌석이 없습니다.");
         }
     }
+
+    private void setAlarm() {
+        //알람 시간 설정
+        alarmTime.setTimeInMillis(currentR.endTime);
+
+        //Receiver 설정
+        Intent intent = new Intent(this, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        //알람 설정
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime.getTimeInMillis(), pendingIntent);
+    }
+
+
+
 }

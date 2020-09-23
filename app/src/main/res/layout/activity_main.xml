@@ -10,6 +10,17 @@
          android:layout_height="wrap_content">
 
          <Button
+             android:id="@+id/refresh_button"
+             android:layout_width="20dp"
+             android:layout_height="20dp"
+             android:layout_marginLeft="60dp"
+             android:layout_marginTop="153dp"
+             android:background="@drawable/refresh">
+         </Button>
+
+
+
+         <Button
              android:id="@+id/logout_button"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
