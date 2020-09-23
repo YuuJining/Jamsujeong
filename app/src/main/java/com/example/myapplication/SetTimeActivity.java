@@ -1,22 +1,30 @@
 package com.example.myapplication;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.NumberPicker;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.core.Tag;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import model.ReservationModel;
 
@@ -38,6 +46,7 @@ public class SetTimeActivity extends AppCompatActivity {
     Date mdate = new Date(now);
     SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
     String currentTime = simpleDate.format(mdate);
+    CheckBox alarmCheck;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +91,8 @@ public class SetTimeActivity extends AppCompatActivity {
         });
 
 
+        alarmCheck = findViewById(R.id.tenMinAlert);
+
         Button positive = (Button) findViewById(R.id.button_start);
         positive.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +122,7 @@ public class SetTimeActivity extends AppCompatActivity {
                 finish();
             }
         });
+
     }
 
     public void addReservationData(int time, Intent intent) {
@@ -120,6 +132,9 @@ public class SetTimeActivity extends AppCompatActivity {
         reservation.alert = true;
         reservation.startTime = now;
         reservation.setTime = time;
+        if(alarmCheck.isChecked()){
+            reservation.alert = true;
+        } else reservation.alert = false;
 
         pickerTime.add(Calendar.MINUTE,time);
         reservation.endTime = pickerTime.getTimeInMillis();
