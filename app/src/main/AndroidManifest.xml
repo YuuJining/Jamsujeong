@@ -37,7 +37,6 @@
         <activity android:name=".AssignActivity">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
-                <action android:name="android.nfc.action.TAG_DISCOVERED" />
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity">
@@ -46,7 +45,12 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".NFCRead" />
+        <activity android:name=".NFCRead" >
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.nfc.action.TAG_DISCOVERED" />
+            </intent-filter>
+        </activity>
         <activity android:name=".SignupActivity" />
         <activity android:name=".AlarmActivity" />
 
