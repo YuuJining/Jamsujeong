@@ -111,10 +111,14 @@ public class NFCRead extends AppCompatActivity {
             }
         }
         if(NfcText == "수정관수면실") {
+            Toast.makeText(this, "수면실 인증을 성공하였습니다", Toast.LENGTH_LONG).show();
             Intent assignIntent = new Intent(this, AssignActivity.class);
             startActivity(assignIntent);
         } else {
             Toast.makeText(this, "수면실 인증을 실패하였습니다", Toast.LENGTH_LONG).show();
+            // 일단 테스팅 위한 임시코드
+            Intent assignIntent = new Intent(this, AssignActivity.class);
+            startActivity(assignIntent);
         }
     }
     //NdefMessage에서 NdefRecord들을 추출 후 NdefRecord 내용 중 텍스트값만 추출
