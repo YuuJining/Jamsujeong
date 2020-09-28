@@ -1,8 +1,10 @@
 package com.example.myapplication;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
@@ -81,7 +83,17 @@ public class SignupActivity extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if(task.isSuccessful()) {
-                                                Toast.makeText(SignupActivity.this,FirebaseAuth.getInstance().getCurrentUser().getEmail()+"님의 메일을 확인해 주세요.",Toast.LENGTH_LONG).show();
+                                                AlertDialog.Builder alBuilder = new AlertDialog.Builder(SignupActivity.this);
+                                                alBuilder.setMessage("이메일이 전송되었습니다.");
+
+                                                alBuilder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        return;
+                                                    }
+                                                });
+                                                alBuilder.setTitle("이메일 인증");
+                                                alBuilder.show();
                                                 signup.setEnabled(true);
                                             } else {
                                                 Log.e("Email Verifier Error","sendEmailVerification",task.getException());
