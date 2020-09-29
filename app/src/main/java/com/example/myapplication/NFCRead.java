@@ -99,7 +99,7 @@ public class NFCRead extends AppCompatActivity {
         if(rawMsgs == null) {
             return;
         }
-        Toast.makeText(getApplicationContext(), "스캔 성공", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "스캔 성공", Toast.LENGTH_SHORT).show();
 
         Log.i("info", "rawMsgs.length: " + rawMsgs.length); //스캔한 태그 개수
         NdefMessage[] msgs;
@@ -110,9 +110,10 @@ public class NFCRead extends AppCompatActivity {
                 NfcText = getTagData(msgs[i]);
             }
         }
-        if(NfcText.equals("수정관수면실")) {
+        if(NfcText.equals("수정관수면실") || NfcText.equals("난향관Forrest") || NfcText.equals("운정캠도서관")) {
             Toast.makeText(this, "수면실 인증을 성공하였습니다", Toast.LENGTH_LONG).show();
             Intent assignIntent = new Intent(this, AssignActivity.class);
+            assignIntent.putExtra(NfcText, "nfcText");
             startActivity(assignIntent);
         } else {
             Toast.makeText(this, "수면실 인증을 실패하였습니다", Toast.LENGTH_LONG).show();
