@@ -111,6 +111,7 @@ public class SetTimeActivity extends AppCompatActivity {
                 intent.putExtra("hours", hour);
                 intent.putExtra("minutes", min);
 
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivityForResult(intent, 101);
             }
         });

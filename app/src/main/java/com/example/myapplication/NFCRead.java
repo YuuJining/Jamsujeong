@@ -114,7 +114,8 @@ public class NFCRead extends AppCompatActivity {
             Toast.makeText(this, "수면실 인증을 성공하였습니다", Toast.LENGTH_LONG).show();
             Intent assignIntent = new Intent(this, AssignAcitivity2.class);
             assignIntent.putExtra("nfcText", NfcText);
-            startActivity(assignIntent);
+            startActivityForResult(assignIntent, 105);
+            NFCRead.this.finish();
         } else {
             Toast.makeText(this, "수면실 인증을 실패하였습니다", Toast.LENGTH_LONG).show();
 //            // 일단 테스팅 위한 임시코드
