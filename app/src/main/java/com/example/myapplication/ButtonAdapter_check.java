@@ -37,7 +37,8 @@ public class ButtonAdapter_check extends BaseAdapter {
 
     SimpleDateFormat hourFormat = new SimpleDateFormat("hh");
     SimpleDateFormat minFormat = new SimpleDateFormat("mm");
-    Calendar now;
+    long now;
+    long leftTime;
     int leftHour = 0;
     int leftMin = 0;
 
@@ -108,17 +109,19 @@ public class ButtonAdapter_check extends BaseAdapter {
                                     seatModel = dataSnapshot.getValue(SeatModel.class);
                                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                                     if (seatModel.seatflag == true) {
-                                        now = Calendar.getInstance();
-                                        leftHour = Integer.parseInt(hourFormat.format(reservationModel.endTime)) - Integer.parseInt(hourFormat.format(now.getTime()));
-                                        leftMin = Integer.parseInt(minFormat.format(reservationModel.endTime)) - Integer.parseInt(minFormat.format(now.getTime()));
-//                                        builder.setMessage("좌석 " + seatNum + ": " + "사용 중" + "\n" + reservationModel.endTime + "까지 사용")
-                                        builder.setMessage("좌석 " + seatNum + ": " + "사용 중" + "\n" + leftHour + "시간 " + leftMin + "분 남았습니다.")
-                                                .setNeutralButton("확 인", new DialogInterface.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(DialogInterface dialog, int which) {
-                                                        Toast.makeText(context, "확인 버튼이 눌렸습니다.", Toast.LENGTH_LONG).show();
-                                                    }
-                                                }).create().show();
+                                        now = System.currentTimeMillis ( );
+                                        if(reservationModel.endTime > now) {
+                                            leftTime = reservationModel.endTime - now;
+                                            leftHour = (int) leftTime / 3600000;
+                                            leftMin =  (int) leftTime / 60000;
+                                            builder.setMessage("좌석 " + seatNum + ": " + "사용 중" + "\n" + leftHour + "시간 " + leftMin + "분 남았습니다.")
+                                                    .setNeutralButton("확 인", new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                            Toast.makeText(context, "확인 버튼이 눌렸습니다.", Toast.LENGTH_LONG).show();
+                                                        }
+                                                    }).create().show();
+                                        }
                                     } else {
                                         builder.setMessage("좌석 " + seatNum + ": 사용 가능")
                                                 .setNeutralButton("확 인", new DialogInterface.OnClickListener() {
