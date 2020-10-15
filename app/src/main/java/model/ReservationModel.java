@@ -6,6 +6,6 @@ public class ReservationModel {
     public Object setTime;
     public long endTime;
     public boolean alert;
-    public String seatNumber;
+    //public String seatNumber;
 
 }

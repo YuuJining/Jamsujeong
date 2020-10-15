@@ -24,7 +24,6 @@ public class LoginActivity extends AppCompatActivity {
     private Button login;
     private Button signup;
     private FirebaseAuth firebaseAuth;
-    private FirebaseAuth.AuthStateListener authStateListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,29 +51,20 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        //로그인 인터페이스 리스너
-
-        authStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    //로그인
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-                } else {
-                    //
-                }
-            }
-        };
     }
 
     void loginEvent() {
         firebaseAuth.signInWithEmailAndPassword(id.getText().toString().trim(), password.getText().toString().trim()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if (!task.isSuccessful()) {
-                    //로그인 실패한 부분
+                if (task.isSuccessful()) {
+                    if(firebaseAuth.getCurrentUser().isEmailVerified()) {
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(LoginActivity.this,"이메일 인증이 되지 않았습니다.",Toast.LENGTH_LONG).show();
+                    }
+                }else {
                     Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -84,12 +74,12 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        firebaseAuth.addAuthStateListener(authStateListener);
+        //firebaseAuth.addAuthStateListener(authStateListener);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        firebaseAuth.removeAuthStateListener(authStateListener);
+        //firebaseAuth.removeAuthStateListener(authStateListener);
     }
 }
