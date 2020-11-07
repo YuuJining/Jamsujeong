@@ -25,14 +25,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" >
-        </activity>
 
-        <activity android:name=".SetTimeActivity">
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".LoginActivity" />
+
+        <activity android:name=".SetTimeActivity"/>
+
         <activity android:name=".CheckActivity" />
 
         <activity android:name=".MainActivity">
@@ -47,6 +44,9 @@
                 <action android:name="android.nfc.action.TAG_DISCOVERED" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".AssignActivity"/>
+
         <activity android:name=".SignupActivity" />
         <activity android:name=".AlarmActivity" />
 
@@ -60,8 +60,6 @@
             android:name=".AlarmService"
             android:enabled="true"
             />
-
-
 
     </application>
 

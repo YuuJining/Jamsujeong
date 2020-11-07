@@ -100,6 +100,7 @@ public class ButtonAdapter_assign extends BaseAdapter {
                                     Toast.makeText(context, "좌석 " + seatNum + " 선택이 완료되었습니다.", Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(context, SetTimeActivity.class);
                                     intent.putExtra("seatId", seatId);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                                     context.startActivity(intent);
                                 }
 
