@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
                             String endTime = simpleDate.format(reservationEndTime);
                             textView.setText(endTime+"까지 이용 가능합니다.");
 
+                            // 좌석뷰 설정
                             if(Integer.parseInt(num) > 100 && Integer.parseInt(num) < 135) {
                                 seatnumber_textview.setVisibility(View.VISIBLE);
                                 int realNumber = Integer.parseInt(num)-100;
@@ -95,10 +96,12 @@ public class MainActivity extends AppCompatActivity {
                                 seatnumber_textview.setVisibility(View.VISIBLE);
                                 int realNumber = Integer.parseInt(num)-200;
                                 seatnumber_textview.setText("forest "+realNumber+"번 좌석");
-                            }else {
+                            }else if(Integer.parseInt(num) > 300 && Integer.parseInt(num) < 319){
                                 seatnumber_textview.setVisibility(View.VISIBLE);
                                 int realNumber = Integer.parseInt(num)-300;
                                 seatnumber_textview.setText("library "+realNumber+"번 좌석");
+                            } else {
+                                seatnumber_textview.setText(null);
                             }
                         }
 
@@ -168,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
                             database.getInstance().getReference().child("seat").child(seatNum).child("seatflag").setValue(false);
                             database.getInstance().getReference().child("seat").child(seatNum).child("endTime").setValue(0);
                             database.getInstance().getReference().child("reservation").child(num).removeValue();
-                            textView.setText("이용 중인 좌석이 없습니다.");
+//                            textView.setText("이용 중인 좌석이 없습니다.");
                         }
                         //로그아웃
                         else {
