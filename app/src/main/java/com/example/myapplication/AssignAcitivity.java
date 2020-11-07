@@ -2,18 +2,15 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-public class AssignAcitivity2 extends AppCompatActivity {
+public class AssignAcitivity extends AppCompatActivity {
 
     Fragment_forest_assign forrest;
     Fragment_library_assign library;
@@ -24,7 +21,7 @@ public class AssignAcitivity2 extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_assign2);
+        setContentView(R.layout.activity_assign);
 
         FragmentManager manager = getSupportFragmentManager();
 
