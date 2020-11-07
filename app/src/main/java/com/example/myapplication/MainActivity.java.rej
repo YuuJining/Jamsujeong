@@ -1,0 +1,9 @@
+diff a/app/src/main/java/com/example/myapplication/MainActivity.java b/app/src/main/java/com/example/myapplication/MainActivity.java	(rejected hunks)
+@@ -44,6 +44,7 @@
+     String uid;
+     String num;
+     String seatNum;
++    String cseatNum;
+     String usingSeatNum;
+     boolean userFlag;
+     private NfcAdapter nfcAdapter;
