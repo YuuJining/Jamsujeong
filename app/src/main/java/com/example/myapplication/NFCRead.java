@@ -107,22 +107,14 @@ public class NFCRead extends AppCompatActivity {
                 NfcText = getTagData(msgs[i]);
             }
         }
-        if(NfcText == "수정관수면실") {
+        if(NfcText.equals("수정관수면실") || NfcText.equals("난향관Forrest") || NfcText.equals("운정캠도서관")) {
             Toast.makeText(this, "수면실 인증을 성공하였습니다", Toast.LENGTH_LONG).show();
-<<<<<<< HEAD
-            Intent assignIntent = new Intent(this, AssignActivity.class);
-            startActivity(assignIntent);
-=======
             Intent assignIntent = new Intent(this, AssignAcitivity.class);
             assignIntent.putExtra("nfcText", NfcText);
             startActivityForResult(assignIntent, 105);
             NFCRead.this.finish();
->>>>>>> NFC태그_데이터읽기
         } else {
             Toast.makeText(this, "수면실 인증을 실패하였습니다", Toast.LENGTH_LONG).show();
-            // 일단 테스팅 위한 임시코드
-            Intent assignIntent = new Intent(this, AssignActivity.class);
-            startActivity(assignIntent);
         }
     }
     //NdefMessage에서 NdefRecord들을 추출 후 NdefRecord 내용 중 텍스트값만 추출
