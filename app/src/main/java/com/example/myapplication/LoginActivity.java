@@ -62,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                     //로그인
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 } else {
                     //
                 }
