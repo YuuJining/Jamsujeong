@@ -10,7 +10,7 @@
         android:layout_width="350dp"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="30dp" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
             android:src="@drawable/nfc" />
 
         <ImageView
-            android:id="@+id/smartPhone-img"
+            android:id="@+id/smartPhone_img"
             android:layout_width="291dp"
             android:layout_height="385dp"
             android:layout_marginLeft="30dp"
