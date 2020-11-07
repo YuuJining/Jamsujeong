@@ -108,7 +108,14 @@ public class SetTimeActivity extends AppCompatActivity {
                 setValue_usingSeatNum(passedIntent);
 
                 Intent intent = new Intent(context, MainActivity.class);
+<<<<<<< HEAD
                 startActivity(intent);
+=======
+                intent.putExtra("hours", hour);
+                intent.putExtra("minutes", min);
+
+                startActivityForResult(intent, 101);
+>>>>>>> NFC태그_데이터읽기
             }
         });
 

@@ -51,6 +51,25 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+<<<<<<< HEAD
+=======
+        //로그인 인터페이스 리스너
+
+        authStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    //로그인
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                } else {
+                    //
+                }
+            }
+        };
+>>>>>>> NFC태그_데이터읽기
     }
 
     void loginEvent() {

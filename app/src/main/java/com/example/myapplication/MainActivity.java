@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         welcome_textview = findViewById(R.id.mainActivity_welcome_textview);
         seatnumber_textview = findViewById(R.id.mainActivity_seatnum_textview);
         //사용 중인 좌석 seatNum값 가져오기 & 사용자 이름 설정
-        database.getInstance().getReference("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+        database.getInstance().getReference("users").child(uid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 UserModel userModel = dataSnapshot.getValue(UserModel.class);
@@ -168,6 +168,7 @@ public class MainActivity extends AppCompatActivity {
                             database.getInstance().getReference().child("seat").child(seatNum).child("seatflag").setValue(false);
                             database.getInstance().getReference().child("seat").child(seatNum).child("endTime").setValue(0);
                             database.getInstance().getReference().child("reservation").child(num).removeValue();
+                            textView.setText("이용 중인 좌석이 없습니다.");
                         }
                         //로그아웃
                         else {

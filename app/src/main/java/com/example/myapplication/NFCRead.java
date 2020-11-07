@@ -4,9 +4,7 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.nfc.NdefMessage;
-import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
-import android.nfc.Tag;
 import android.nfc.tech.NfcF;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -14,7 +12,6 @@ import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.Nullable;
@@ -112,8 +109,15 @@ public class NFCRead extends AppCompatActivity {
         }
         if(NfcText == "수정관수면실") {
             Toast.makeText(this, "수면실 인증을 성공하였습니다", Toast.LENGTH_LONG).show();
+<<<<<<< HEAD
             Intent assignIntent = new Intent(this, AssignActivity.class);
             startActivity(assignIntent);
+=======
+            Intent assignIntent = new Intent(this, AssignAcitivity.class);
+            assignIntent.putExtra("nfcText", NfcText);
+            startActivityForResult(assignIntent, 105);
+            NFCRead.this.finish();
+>>>>>>> NFC태그_데이터읽기
         } else {
             Toast.makeText(this, "수면실 인증을 실패하였습니다", Toast.LENGTH_LONG).show();
             // 일단 테스팅 위한 임시코드
