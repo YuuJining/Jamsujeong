@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     String uid;
     String num;
     String seatNum;
+    String cseatNum;
     String usingSeatNum;
     boolean userFlag;
     private NfcAdapter nfcAdapter;
@@ -73,14 +74,15 @@ public class MainActivity extends AppCompatActivity {
                 UserModel userModel = dataSnapshot.getValue(UserModel.class);
                 welcome_textview.setText(userModel.userName+"님 환영합니다.");
                 num = Integer.toString(userModel.usingSeatNum);
+                cseatNum = "seat" + num;
                 userFlag = userModel.flag;
 
                 if(Integer.parseInt(num) != 0) {
-                    database.getInstance().getReference("reservation").child(num).addValueEventListener(new ValueEventListener() {
+                    database.getInstance().getReference("seat").child(cseatNum).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            ReservationModel reservationModel = dataSnapshot.getValue(ReservationModel.class);
-                            Date reservationEndTime = new Date(reservationModel.endTime);
+                            SeatModel seatModel = dataSnapshot.getValue(SeatModel.class);
+                            Date reservationEndTime = new Date(seatModel.endTime);
                             SimpleDateFormat simpleDate = new SimpleDateFormat("hh시 mm분");
                             String endTime = simpleDate.format(reservationEndTime);
                             textView.setText(endTime+"까지 이용 가능합니다.");
@@ -164,6 +166,7 @@ public class MainActivity extends AppCompatActivity {
                             database.getInstance().getReference().child("users").child(uid).child("flag").setValue(false);
                             database.getInstance().getReference().child("users").child(uid).child("usingSeatNum").setValue(0);
                             database.getInstance().getReference().child("seat").child(seatNum).child("seatflag").setValue(false);
+                            database.getInstance().getReference().child("seat").child(seatNum).child("endTime").setValue(0);
                             database.getInstance().getReference().child("reservation").child(num).removeValue();
                         }
                         //로그아웃

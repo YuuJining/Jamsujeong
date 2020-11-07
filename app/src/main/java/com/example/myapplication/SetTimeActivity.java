@@ -108,10 +108,7 @@ public class SetTimeActivity extends AppCompatActivity {
                 setValue_usingSeatNum(passedIntent);
 
                 Intent intent = new Intent(context, MainActivity.class);
-                intent.putExtra("hours", hour);
-                intent.putExtra("minutes", min);
-
-                startActivityForResult(intent, 101);
+                startActivity(intent);
             }
         });
 
@@ -129,7 +126,6 @@ public class SetTimeActivity extends AppCompatActivity {
         int seatNum = intent.getIntExtra("seatId", 100);
         ReservationModel reservation = new ReservationModel();
         reservation.uid = firebaseAuth.getInstance().getCurrentUser().getUid();
-        reservation.alert = true;
         reservation.startTime = now;
         reservation.setTime = time;
         if(alarmCheck.isChecked()){
@@ -143,10 +139,12 @@ public class SetTimeActivity extends AppCompatActivity {
         FirebaseDatabase.getInstance().getReference().child("reservation").child(seatId).setValue(reservation);
     }
 
+    //SeatFlag True로 변경 및 endTime추가
     public void setSeatFlagTrue(Intent intent) {
         String num = String.valueOf(intent.getIntExtra("seatId", 100));
         String seatNum = "seat" + num;
         FirebaseDatabase.getInstance().getReference().child("seat").child(seatNum).child("seatflag").setValue(true);
+        FirebaseDatabase.getInstance().getReference().child("seat").child(seatNum).child("endTime").setValue(pickerTime.getTimeInMillis());
     }
 
     public void setUserFlagTrue() {
