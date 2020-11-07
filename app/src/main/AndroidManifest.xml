@@ -34,18 +34,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".CheckActivity" />
-<<<<<<< HEAD
-        <activity android:name=".AssignActivity">
-            <intent-filter>
-                <action android:name="android.nfc.action.TAG_DISCOVERED" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-=======
 
-        <activity android:name=".AssignAcitivity"/>
-
->>>>>>> NFC태그_데이터읽기
         <activity android:name=".MainActivity">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT"/>

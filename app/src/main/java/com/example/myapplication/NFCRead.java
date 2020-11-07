@@ -109,7 +109,7 @@ public class NFCRead extends AppCompatActivity {
         }
         if(NfcText.equals("수정관수면실") || NfcText.equals("난향관Forrest") || NfcText.equals("운정캠도서관")) {
             Toast.makeText(this, "수면실 인증을 성공하였습니다", Toast.LENGTH_LONG).show();
-            Intent assignIntent = new Intent(this, AssignAcitivity.class);
+            Intent assignIntent = new Intent(this, AssignActivity.class);
             assignIntent.putExtra("nfcText", NfcText);
             startActivityForResult(assignIntent, 105);
             NFCRead.this.finish();

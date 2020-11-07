@@ -24,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button login;
     private Button signup;
     private FirebaseAuth firebaseAuth;
+    private FirebaseAuth.AuthStateListener authStateListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +52,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-<<<<<<< HEAD
-=======
         //로그인 인터페이스 리스너
-
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -69,7 +67,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         };
->>>>>>> NFC태그_데이터읽기
     }
 
     void loginEvent() {

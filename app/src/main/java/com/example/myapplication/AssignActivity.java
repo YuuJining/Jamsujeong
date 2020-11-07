@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-public class AssignAcitivity extends AppCompatActivity {
+public class AssignActivity extends AppCompatActivity {
 
     Fragment_forest_assign forrest;
     Fragment_library_assign library;
