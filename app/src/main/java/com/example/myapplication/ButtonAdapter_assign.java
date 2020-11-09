@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +30,7 @@ public class ButtonAdapter_assign extends BaseAdapter {
     private LayoutInflater thisInflater;
     private DatabaseReference seat = FirebaseDatabase.getInstance().getReference().child("seat");
     SeatModel seatModel;
+
 
     public ButtonAdapter_assign(Context context, String[] Buttons, Integer[] ButtonIds) {
         this.context = context;
@@ -64,7 +67,6 @@ public class ButtonAdapter_assign extends BaseAdapter {
 
             button = new Button(context);
             button.setText(ButtonNames[position]);
-            button_default.setImageResource(R.drawable.button_design1);
 
 
             button.setOnClickListener(new View.OnClickListener() {
