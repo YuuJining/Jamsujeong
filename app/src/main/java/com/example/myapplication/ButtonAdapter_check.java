@@ -81,6 +81,8 @@ public class ButtonAdapter_check extends BaseAdapter {
 
         if (convertView != null) {
             button = (Button) convertView;
+            button.setBackgroundResource(R.drawable.button_background_circle);
+            button.setPadding(8, 8, 8, 8);
         } else {
 
             convertView = thisInflater.inflate(R.layout.grid_item, parent, false);
@@ -88,9 +90,9 @@ public class ButtonAdapter_check extends BaseAdapter {
 
             button = new Button(context);
             button.setText(ButtonNames[position]);
-            button_default.setImageResource(R.drawable.button_design1);
-
-
+            button.setBackgroundResource(R.drawable.button_background_circle);
+            button.setPadding(8, 8, 8, 8);
+            
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
