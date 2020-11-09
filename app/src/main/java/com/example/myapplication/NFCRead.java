@@ -111,6 +111,7 @@ public class NFCRead extends AppCompatActivity {
             Toast.makeText(this, "수면실 인증을 성공하였습니다", Toast.LENGTH_LONG).show();
             Intent assignIntent = new Intent(this, AssignActivity.class);
             assignIntent.putExtra("nfcText", NfcText);
+            assignIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             startActivityForResult(assignIntent, 105);
             NFCRead.this.finish();
         } else {
