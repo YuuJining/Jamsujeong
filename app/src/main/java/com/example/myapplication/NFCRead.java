@@ -32,7 +32,7 @@ public class NFCRead extends AppCompatActivity {
         setContentView(R.layout.nfc_read);
 
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+        //mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         if(nfcAdapter == null) {
             Toast.makeText(this, "NFC태그를 활성화하세요", Toast.LENGTH_SHORT).show();
