@@ -3,63 +3,81 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#756EB7">
 
     <LinearLayout
-        android:id="@+id/time_pick"
-        android:layout_width="400dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="200dp"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
-        android:paddingLeft="40dp"
-        android:orientation="horizontal"
-        >
-
-        <NumberPicker
-            android:id="@+id/hpicker"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="20dp"
-            android:text="시간"
-            android:textSize="20dp"/>
-
-        <NumberPicker
-            android:id="@+id/mpicker"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="분"
-            android:textSize="20dp"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
+        android:id="@+id/setTime_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"/>
+        android:layout_centerVertical="true"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/main_background_line_yellow">
 
+        <LinearLayout
+            android:id="@+id/time_pick"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <NumberPicker
+                android:id="@+id/hpicker"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="20dp"
+                android:text="시간"
+                android:textSize="20dp"/>
+
+            <NumberPicker
+                android:id="@+id/mpicker"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="분"
+                android:textSize="20dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/alerts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="70dp"
+            android:layout_marginBottom="30dp"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/tenMinAlert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="알람으로 깨워주세요"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
     <LinearLayout
         android:id="@+id/buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_below="@+id/alerts"
+        android:layout_below="@+id/setTime_layout"
         android:layout_marginHorizontal="20dp"
         android:layout_marginVertical="20dp"
         android:orientation="horizontal">
@@ -70,7 +88,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginRight="15dp"
-            android:background="@drawable/button_default"
+            android:background="@drawable/button_background"
             android:text="시 작" />
 
         <Button
@@ -79,27 +97,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginLeft="15dp"
-            android:background="@drawable/button_default"
+            android:background="@drawable/button_background2"
             android:text="닫 기" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/alerts"
-        android:layout_width="235dp"
-        android:layout_height="59dp"
-        android:layout_below="@+id/time_pick"
-        android:layout_alignParentEnd="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginHorizontal="130dp"
-        android:layout_marginEnd="95dp"
-        android:orientation="horizontal">
-
-        <CheckBox
-            android:id="@+id/tenMinAlert"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="알람으로 깨워주세요"
-            android:textSize="20dp" />
     </LinearLayout>
 
 </RelativeLayout>
