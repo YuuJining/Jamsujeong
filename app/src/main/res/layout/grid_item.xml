@@ -8,6 +8,7 @@
         android:id="@+id/button_background"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:adjustViewBounds="true"
         android:background="@drawable/button_background_circle"/>
 
 </RelativeLayout>
