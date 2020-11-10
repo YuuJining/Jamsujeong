@@ -111,11 +111,15 @@ public class ButtonAdapter_check extends BaseAdapter {
                                     seatModel = dataSnapshot.getValue(SeatModel.class);
                                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                                     if (seatModel.seatflag == true) {
-                                        now = System.currentTimeMillis ( );
-                                        if(reservationModel.endTime > now) {
-                                            leftTime = reservationModel.endTime - now;
-                                            leftHour = (int) leftTime / 3600000;
-                                            leftMin =  (int) leftTime / 60000;
+                                        now = Calendar.getInstance().getTimeInMillis();
+                                        leftTime = (reservationModel.endTime - now);
+                                        leftHour =  (int)(leftTime / 3600000);
+                                        if(leftHour < 1){
+                                            leftMin = (int)(leftTime / 60000);
+                                        } else {
+                                            leftMin = (int)(leftTime / 60000) - 60;
+                                        }
+
                                             builder.setMessage("좌석 " + seatNum + ": " + "사용 중" + "\n" + leftHour + "시간 " + leftMin + "분 남았습니다.")
                                                     .setNeutralButton("확 인", new DialogInterface.OnClickListener() {
                                                         @Override
@@ -123,7 +127,6 @@ public class ButtonAdapter_check extends BaseAdapter {
                                                             Toast.makeText(context, "확인 버튼이 눌렸습니다.", Toast.LENGTH_LONG).show();
                                                         }
                                                     }).create().show();
-                                        }
                                     } else {
                                         builder.setMessage("좌석 " + seatNum + ": 사용 가능")
                                                 .setNeutralButton("확 인", new DialogInterface.OnClickListener() {

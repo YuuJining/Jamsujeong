@@ -222,31 +222,31 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //알람 구현
-//        currentUser.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                currentU = dataSnapshot.getValue(UserModel.class);
-//                if(currentU.flag == true) {
-//                    reservation.child(String.valueOf(currentU.usingSeatNum)).addValueEventListener(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                            currentR = dataSnapshot.getValue(ReservationModel.class);
-//                            if (currentR.alert == true) setAlarm();
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                        }
-//                    });
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
+        currentUser.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                currentU = dataSnapshot.getValue(UserModel.class);
+                if(currentU.flag == true) {
+                    reservation.child(String.valueOf(currentU.usingSeatNum)).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            currentR = dataSnapshot.getValue(ReservationModel.class);
+                            if (currentR.alert == true) setAlarm();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
     }
 
