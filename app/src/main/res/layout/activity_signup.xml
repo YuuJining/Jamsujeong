@@ -1,75 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SignupActivity"
-    android:orientation="vertical">
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/signupActivity_edittext_email"
-            android:hint="이메일"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/signupActivity_edittext_name"
-            android:hint="이름"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/signupActivity_edittext_password"
-            android:hint="패스워드"
-            android:inputType="textPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/signupActivity_edittext_password_check"
-            android:hint="패스워드 확인"
-            android:inputType="textPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:id="@+id/signupActivity_textview_password_check"
-        android:textSize="9dp"
-        android:layout_marginLeft="5dp"
-        android:text="패스워드가 일치하지 않습니다."
-        android:visibility="invisible"
+    android:background="#756EB7">
+    <LinearLayout
+        android:id="@+id/input_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#FF0000"/>
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="150dp"
+        android:orientation="vertical"
+        android:background="@drawable/button_background2">
 
-    <Button
-        android:text="이메일인증"
-        android:id="@+id/signupActivity_button_verifier"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+            <EditText
+                android:id="@+id/signupActivity_edittext_email"
+                android:hint="이메일"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+            <EditText
+                android:id="@+id/signupActivity_edittext_name"
+                android:hint="이름"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+            <EditText
+                android:id="@+id/signupActivity_edittext_password"
+                android:hint="패스워드"
+                android:inputType="textPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+            <EditText
+                android:id="@+id/signupActivity_edittext_password_check"
+                android:hint="패스워드 확인"
+                android:inputType="textPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/signupActivity_textview_password_check"
+            android:textSize="9dp"
+            android:layout_marginLeft="5dp"
+            android:text="패스워드가 일치하지 않습니다."
+            android:visibility="invisible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FF0000"/>
+
+        <Button
+            android:text="이메일인증"
+            android:id="@+id/signupActivity_button_verifier"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
     <Button
         android:text="회원가입"
         android:id="@+id/signupActivity_button_signup"
-        android:layout_width="match_parent"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/input_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_background"
         android:enabled="false"/>
-
-</LinearLayout>
+</RelativeLayout>

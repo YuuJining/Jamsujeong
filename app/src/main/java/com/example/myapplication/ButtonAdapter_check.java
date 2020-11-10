@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -81,16 +82,15 @@ public class ButtonAdapter_check extends BaseAdapter {
 
         if (convertView != null) {
             button = (Button) convertView;
-            button.setBackgroundResource(R.drawable.button_background_circle);
+            button.setBackgroundResource(R.drawable.grid_item);
+            button.setLayoutParams(new ViewGroup.LayoutParams(120, 120));
             button.setPadding(8, 8, 8, 8);
+
         } else {
-
-            convertView = thisInflater.inflate(R.layout.grid_item, parent, false);
-            ImageView button_default = (ImageView) convertView.findViewById(R.id.button_background);
-
             button = new Button(context);
             button.setText(ButtonNames[position]);
-            button.setBackgroundResource(R.drawable.button_background_circle);
+            button.setBackgroundResource(R.drawable.grid_item);
+            button.setLayoutParams(new ViewGroup.LayoutParams(120, 120));
             button.setPadding(8, 8, 8, 8);
             
             button.setOnClickListener(new View.OnClickListener() {
