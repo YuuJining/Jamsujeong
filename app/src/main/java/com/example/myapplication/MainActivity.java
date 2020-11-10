@@ -121,35 +121,35 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //새로고침 누르면 시간 지난 reservation 삭제
-        Button refreshButton = (Button) findViewById(R.id.refresh_button);
-        refreshButton.setOnClickListener(new View.OnClickListener() {
-            long now = Calendar.getInstance().getTimeInMillis();
-            @Override
-            public void onClick(View v) {
-                reservation.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for(DataSnapshot ds : dataSnapshot.getChildren()){
-                            ReservationModel rmodel = ds.getValue(ReservationModel.class);
-                            if((long) rmodel.endTime < now){
-                                database.getInstance().getReference().child("users").child(rmodel.uid).child("flag").setValue(false);
-                                database.getInstance().getReference().child("users").child(rmodel.uid).child("usingSeatNum").setValue(0);
-                                seatNum = "seat" + ds.getKey();
-                                database.getInstance().getReference().child("seat").child(seatNum).child("seatflag").setValue(false);
-                                reservation.child(ds.getKey()).removeValue();
-                            }
-
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-                Toast.makeText(getApplicationContext(), "새로고침 완료", Toast.LENGTH_LONG).show();
-            }
-        });
+//        Button refreshButton = (Button) findViewById(R.id.refresh_button);
+//        refreshButton.setOnClickListener(new View.OnClickListener() {
+//            long now = Calendar.getInstance().getTimeInMillis();
+//            @Override
+//            public void onClick(View v) {
+//                reservation.addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                        for(DataSnapshot ds : dataSnapshot.getChildren()){
+//                            ReservationModel rmodel = ds.getValue(ReservationModel.class);
+//                            if((long) rmodel.endTime < now){
+//                                database.getInstance().getReference().child("users").child(rmodel.uid).child("flag").setValue(false);
+//                                database.getInstance().getReference().child("users").child(rmodel.uid).child("usingSeatNum").setValue(0);
+//                                seatNum = "seat" + ds.getKey();
+//                                database.getInstance().getReference().child("seat").child(seatNum).child("seatflag").setValue(false);
+//                                reservation.child(ds.getKey()).removeValue();
+//                            }
+//
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                    }
+//                });
+//                Toast.makeText(getApplicationContext(), "새로고침 완료", Toast.LENGTH_LONG).show();
+//            }
+//        });
 
         //로그아웃/이용해제 버튼 동작 구현
         Button logoutButton = (Button) findViewById(R.id.logout_button);
