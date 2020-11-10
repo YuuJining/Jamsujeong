@@ -64,13 +64,11 @@ public class ButtonAdapter_assign extends BaseAdapter {
             button.setLayoutParams(new ViewGroup.LayoutParams(120, 120));
             button.setPadding(8, 8, 8, 8);
         } else {
+            button = new Button(context);
+            button.setText(ButtonNames[position]);
             button.setBackgroundResource(R.drawable.grid_item);
             button.setLayoutParams(new ViewGroup.LayoutParams(120, 120));
             button.setPadding(8, 8, 8, 8);
-
-            button = new Button(context);
-            button.setText(ButtonNames[position]);
-
 
             button.setOnClickListener(new View.OnClickListener() {
                 @Override

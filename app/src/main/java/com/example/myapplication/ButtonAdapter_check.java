@@ -124,7 +124,7 @@ public class ButtonAdapter_check extends BaseAdapter {
                                                     .setNeutralButton("확 인", new DialogInterface.OnClickListener() {
                                                         @Override
                                                         public void onClick(DialogInterface dialog, int which) {
-                                                            Toast.makeText(context, "확인 버튼이 눌렸습니다.", Toast.LENGTH_LONG).show();
+//                                                            Toast.makeText(context, "확인 버튼이 눌렸습니다.", Toast.LENGTH_LONG).show();
                                                         }
                                                     }).create().show();
                                     } else {
@@ -132,7 +132,7 @@ public class ButtonAdapter_check extends BaseAdapter {
                                                 .setNeutralButton("확 인", new DialogInterface.OnClickListener() {
                                                     @Override
                                                     public void onClick(DialogInterface dialog, int which) {
-                                                        Toast.makeText(context, "확인 버튼이 눌렸습니다.", Toast.LENGTH_LONG).show();
+//                                                        Toast.makeText(context, "확인 버튼이 눌렸습니다.", Toast.LENGTH_LONG).show();
                                                     }
                                                 }).create().show();
                                     }
