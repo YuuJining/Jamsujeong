@@ -3,11 +3,10 @@
 
 ### :pushpin: 사용 기술   
 ```
-Language : Java  
-Database & Back-End : Firebase (Authentication, Realtime-Database)  
-Develop Environment : Android Studio, Git   
+\*\*Language : Java\*\*  
+\*\*Database & Back-End : Firebase (Authentication, Realtime-Database)\*\*  
+\*\*Develop Environment : Android Studio, Git\*\*   
 ```
-<br>
 
 ### :pencil: 제작 동기    
 * 성신여자대학교 수면실의 경우 이용 현황을 알 수 없어서 만석의 경우, 하염없이 기다려야 하는 상황이 발생함.<br>
