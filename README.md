@@ -18,12 +18,9 @@
 * 좌석 이용은 각 수면실의 NFC를 태그해야만 사용 가능하도록 기능 제공   
 
 ### :pencil: 앱 UI 소개
-* 사용자 앱 시나리오
-<br>
-![처음](./image/capture1.PNG)
-<br>
-![두번쨰](./image/capture2.PNG)
-<br>
+* 사용자 앱 시나리오 <br>
+![처음](./image/capture1.PNG) <br>
+![두번쨰](./image/capture2.PNG) <br>
 ![세번째](./image/capture3.PNG)  
 
 ### :pencil: 보완 방향
