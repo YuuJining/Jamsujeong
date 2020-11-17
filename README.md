@@ -4,9 +4,8 @@
 ### :pushpin: 사용 기술   
 > * Language : Java  
 > * Database & Back-End : Firebase (Authentication, Realtime-Database)  
-> * Develop Environment : Android Studio, Git  
+> * Develop Environment : Android Studio, Git   
 
----
 
 ### :pencil: 제작 동기    
 * 성신여자대학교 수면실의 경우 이용 현황을 알 수 없어서 만석의 경우, 하염없이 기다려야 하는 상황이 발생함.<br>
@@ -17,3 +16,6 @@
 * 각 수면실 별 이용 좌석의 남은 시간들을 한 눈에 볼 수 있도록 제공   
 * 좌석 이용시, 알람 기능 제공   
 * 좌석 이용은 각 수면실의 NFC를 태그해야만 사용 가능하도록 기능 제공   
+
+### :pencil: 앱 UI 소개
+
