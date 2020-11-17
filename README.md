@@ -3,9 +3,9 @@
 
 ### :pushpin: 사용 기술   
 ```
-\*\*Language : Java\*\*  
-\*\*Database & Back-End : Firebase (Authentication, Realtime-Database)\*\*  
-\*\*Develop Environment : Android Studio, Git\*\*   
+\*\*Language\*\* : Java 
+\*\*Database & Back-End\*\* : Firebase (Authentication, Realtime-Database)  
+\*\*Develop Environment\*\* : Android Studio, Git  
 ```
 
 ### :pencil: 제작 동기    
